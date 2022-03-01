@@ -1,0 +1,46 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# VSCode
+.vscode/
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+#Solar
+#Igore solr
+solr/
+
+#Ignore local properties
+localconfig.properties
+test.properties
+
+#Igore backups
+backup/
+*.bkp
+
+#Ignore logs
+*.log
+*.log*
+
+# Angular
+node_modules/
+typings/
+dist/
+package-lock.json
+.npmrc
+
+#Zip and War files
+*.zip
+*.war

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>E-Commerce UI Demo</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <link rel="icon" href="https://storage.googleapis.com/www.increff.com/img/favicon.png?v=2" type="image/x-icon" />
+    <link rel="stylesheet"
+        href="https://storage.googleapis.com/static.increff.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row d-flex justify-content-center align-items-center my-5">
+                <aside class="col-4 mx-auto ">
+                    <div class="card ">
+                        <article class="card-body">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+
+                                <img src="assets/logo.png" height="60" />
+                                <h4 class="card-title mb-4 mt-3">Login</h4>
+                            </div>
+                            <form id="login_form">
+                                <div class="form-group">
+                                    <label>Your email</label>
+                                    <input name="" class="form-control" id="email_input" value="a@a.a" required
+                                        placeholder="Email" type="email">
+                                </div> <!-- form-group// -->
+                                <div class="form-group">
+                                    <label>Your password</label>
+                                    <input class="form-control" placeholder="******" value="123" required
+                                        id="password_input" type="password">
+                                </div> <!-- form-group// -->
+                                <p class="text-danger" id="error_text"></p>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block"> Login </button>
+                                </div> <!-- form-group// -->
+                            </form>
+                        </article>
+                    </div> <!-- card.// -->
+                </aside> <!-- col.// -->
+
+            </div> <!-- row.// -->
+        </div>
+
+    </div>
+    <script src="https://storage.googleapis.com/static.increff.com/jquery/3.3.1/jquery-3.3.1.min.js"></script>
+    <script src="https://storage.googleapis.com/static.increff.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</body>
+<script src="/login.js"></script>
+
+</html>
