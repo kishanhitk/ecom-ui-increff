@@ -18,7 +18,6 @@ const login = async (e) => {
     return false;
 };
 function init() {
-    console.log("loaded");
     $("#login_form").submit(login);
 }
 
