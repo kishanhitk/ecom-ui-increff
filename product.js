@@ -24,10 +24,36 @@ const checkLoginState = () => {
         ? loginButton.hide()
         : logoutButton.hide();
 };
+
+const addToCart = async () => {
+    const productId = window.location.search.split("=")[1];
+    // Get existing cart object if any from sessionStorage
+    let cart = window.sessionStorage.getItem("cart");
+    cart = cart ? JSON.parse(cart) : [];
+    // Find if product already exists in cart
+    const existingProduct = cart.find(
+        (element) => element.productId == productId
+    );
+    if (existingProduct) {
+        // If product already exists, increment quantity
+        existingProduct.quantity++;
+    } else {
+        // If product does not exist, add product to cart
+        cart.push({ productId, quantity: 1 });
+    }
+    // Update cart in sessionStorage
+    window.sessionStorage.setItem("cart", JSON.stringify(cart));
+    $.notify("Item added to cart", "success");
+    // // Update cart count in header
+    // const cartCount = cart.reduce((acc, element) => acc + element.quantity, 0);
+    // $("#cart_count").text(cartCount);
+};
+
 function init() {
     populateData();
     checkLoginState();
     $("#logout_button").click(logout);
+    $("#add_to_cart_button").click(addToCart);
 }
 
 $(document).ready(init);

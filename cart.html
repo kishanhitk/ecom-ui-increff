@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>E-Commerce UI Demo</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <link rel="icon" href="https://storage.googleapis.com/www.increff.com/img/favicon.png?v=2" type="image/x-icon" />
+    <link rel="stylesheet"
+        href="https://storage.googleapis.com/static.increff.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Increff E-Commerce</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <div class="row ">
+                        <a class="nav-link" href="#">
+                            <i class="material-icons">shopping_cart</i><span class="badge badge-light" id="cart_count""></span>
+            </a>
+            <a href=" /login.html" class="btn btn-primary mx-3" id="login_button">Login</a>
+                        <button class="btn btn-outline-danger mx-3" id="logout_button">Logout</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="font-weight-light mt-3 ">Your Cart</h2>
+                <div id="cart_items"></div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <footer class="footer">
+        Copyright Increff 2022
+        &nbsp;
+    </footer>
+    <script src="https://storage.googleapis.com/static.increff.com/jquery/3.3.1/jquery-3.3.1.min.js"></script>
+    <script src="https://storage.googleapis.com/static.increff.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/cart.js"></script>
+</body>
+
+</html>
