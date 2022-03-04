@@ -4,7 +4,7 @@ const getData = async () => {
     const json = await resp.json();
     json.forEach((element) => {
         const product = $(`
-        <a href="/product.html" class="col-3 text-center text-reset text-decoration-none">
+        <a href="/product.html?id=${element.id}" class="col-3 text-center text-reset text-decoration-none">
           <div class="row">
             <div class="col-10 mx-auto p-4">
               <img class="img-fluid rounded img-thumbnail p-3 border-0 shadow-sm" src=${element.imageUrl}

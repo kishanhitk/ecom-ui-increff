@@ -17,8 +17,15 @@ const login = async (e) => {
     console.log(json);
     return false;
 };
+
+const checkLogin = () => {
+    console.log(window.sessionStorage.getItem("user"));
+    if (window.sessionStorage.getItem("user"))
+        window.location.href = "./index.html";
+};
 function init() {
     $("#login_form").submit(login);
+    checkLogin();
 }
 
 $(document).ready(init);

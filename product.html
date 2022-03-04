@@ -40,13 +40,14 @@
     <div class="container-fluid">
         <div class="row mx-auto mt-5" id="product_detail">
             <div class="col-6  mx-auto d-flex justify-content-center bg-light">
-                <img src="https://picsum.photos/536/354">
+                <img id="product_image" src="https://picsum.photos/200/300">
             </div>
             <div class="col-6">
-                <h1>Dizo Watch R</h1>
-                <h3 class="text-primary">Rs. 1,999</h3>
+                <h1 id="product_name">Dizo Watch R</h1>
+                <h3 class="text-primary" id="product_mrp">Rs. 1,999</h3>
                 <h5 class="mt-3">Description</h5>
-                <h6>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia fugit explicabo a inventore
+                <h6 id="product_description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia fugit
+                    explicabo a inventore
                     facilis earum corrupti neque pariatur praesentium rerum vitae odit ab necessitatibus minima
                     possimus, magnam, aperiam totam libero?
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae a dignissimos at fuga! Saepe
@@ -54,17 +55,17 @@
                     voluptatum culpa et ea. Neque.
                 </h6>
                 <div class="row mt-4">
-                    <p class="col-6"><strong>Style ID:</strong> 102</p>
-                    <p class="col-6"><strong>Style ID:</strong> 102</p>
-                    <p class="col-6"><strong>Style ID:</strong> 102</p>
+                    <p class="col-6" id="product_category"><strong>Category:</strong> </p>
+                    <p class="col-6" id="product_style_id"><strong>Style ID:</strong> </p>
+                    <p class="col-6" id="product_brand"><strong> Brand:</strong> </p>
                 </div>
-                <button class="btn btn-primary mt-3">Add to Cart</button>
+                <button class="btn btn-primary mt-3" id="add_to_cart_button">Add to Cart</button>
             </div>
         </div>
     </div>
     <script src="https://storage.googleapis.com/static.increff.com/jquery/3.3.1/jquery-3.3.1.min.js"></script>
     <script src="https://storage.googleapis.com/static.increff.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="/index.js"></script>
+    <script src="/product.js"></script>
 </body>
 
 </html>
