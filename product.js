@@ -26,6 +26,8 @@ const checkLoginState = () => {
 };
 
 const addToCart = async () => {
+    const quantity = $("#quantity").val();
+
     const productId = window.location.search.split("=")[1];
     // Get existing cart object if any from sessionStorage
     let cart = window.sessionStorage.getItem("cart");
@@ -36,24 +38,28 @@ const addToCart = async () => {
     );
     if (existingProduct) {
         // If product already exists, increment quantity
-        existingProduct.quantity++;
+        existingProduct.quantity =
+            parseInt(existingProduct.quantity) + parseInt(quantity);
     } else {
         // If product does not exist, add product to cart
-        cart.push({ productId, quantity: 1 });
+        cart.push({ productId, quantity });
     }
     // Update cart in sessionStorage
     window.sessionStorage.setItem("cart", JSON.stringify(cart));
     $.notify("Item added to cart", "success");
     // // Update cart count in header
-    // const cartCount = cart.reduce((acc, element) => acc + element.quantity, 0);
-    // $("#cart_count").text(cartCount);
+    const cartCount = cart.reduce((acc, element) => acc + element.quantity, 0);
+    $("#cart_count").text(cartCount);
 };
 
 function init() {
     populateData();
     checkLoginState();
     $("#logout_button").click(logout);
-    $("#add_to_cart_button").click(addToCart);
+    $("#add_to_cart").submit((event) => {
+        event.preventDefault();
+        addToCart(event);
+    });
 }
 
 $(document).ready(init);
