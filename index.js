@@ -12,6 +12,7 @@ const getData = async () => {
             </div>
             <div class="col-12">
               <h4>${element.name}</h4>
+              <h6>MRP: Rs.${element.mrp}</h6>
             </div>
           </div>
         </a>
