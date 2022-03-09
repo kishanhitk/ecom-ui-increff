@@ -3,14 +3,19 @@ const populateData = async () => {
     const resp = await fetch(`./assets/inventory.json`);
     const json = await resp.json();
     const product = json.find((element) => element.id == productId);
-    console.log(product);
-    $("#product_name").text(product.name);
-    $("#product_mrp").text(`Rs. ${product.mrp}`);
-    $("#product_image").attr("src", product.imageUrl);
-    $("#product_description").text(product.description);
-    $("#product_category").append(product.category);
-    $("#product_brand").append(product.brandId);
-    $("#product_style_id").append(product.styleId);
+
+    if (product == undefined) {
+        $("#product_detail").hide();
+        $("#product_not_found").removeClass("d-none");
+    } else {
+        $("#product_name").text(product.name);
+        $("#product_mrp").text(`Rs. ${product.mrp}`);
+        $("#product_image").attr("src", product.imageUrl);
+        $("#product_description").text(product.description);
+        $("#product_category").append(product.category);
+        $("#product_brand").append(product.brandId);
+        $("#product_style_id").append(product.styleId);
+    }
 };
 const logout = () => {
     window.sessionStorage.removeItem("user");
