@@ -4,7 +4,7 @@ const displayCartItems = async () => {
     const cartItems = window.sessionStorage.getItem("cart");
     if (cartItems) {
         const cartItemsArray = JSON.parse(cartItems);
-        const resp = await fetch("./assets/inventory.json");
+        const resp = await fetch("/assets/inventory.json");
         const json = await resp.json();
         cartItemsArray.forEach((item) => {
             const product = json.find(
@@ -13,15 +13,18 @@ const displayCartItems = async () => {
             const itemElement = `
             <div class="card my-3">
             <div class="card-body">
-                <div class="d-flex align-items-center justify-content-between">
-                    <img src="https://picsum.photos/200/100?random=1" />
+                <div class="d-flex align-items-center  justify-content-between">
+                    <img src="${product.imageUrl}"  />
                     <div>
 
                         <h5 class="card-title">${product.name}</h5>
                         <h6>${product.brandId}</h6>
                     </div>
+                    <div class="row align-items-center align-content-center">
+                    <button class="btn btn-light mx-3" onclick='decrementQuantity("${product.id}")' >-</button>
                     <p>${item.quantity}</p>
-                    <button class="btn" onClick='deleteItemFromCart("${product.id}")'>
+                    <button class="btn btn-light mx-3" onclick='incrementQuantity("${product.id}")' >+</button>
+</div>                    <button class="btn" onClick='deleteItemFromCart("${product.id}")'>
                         <i class="material-icons">delete</i>
                     </button>
                 </div>
@@ -31,6 +34,45 @@ const displayCartItems = async () => {
             cartItemsList.append(itemElement);
         });
     }
+};
+const decrementQuantity = (productId) => {
+    const cartItems = window.sessionStorage.getItem("cart");
+    if (cartItems) {
+        const cartItemsArray = JSON.parse(cartItems);
+        const item = cartItemsArray.find(
+            (element) => element.productId == productId
+        );
+        if (item) {
+            if (item.quantity > 1) {
+                item.quantity--;
+            } else {
+                cartItemsArray.splice(cartItemsArray.indexOf(item), 1);
+            }
+            window.sessionStorage.setItem(
+                "cart",
+                JSON.stringify(cartItemsArray)
+            );
+        }
+    }
+    displayCartItems();
+};
+
+const incrementQuantity = (productId) => {
+    const cartItems = window.sessionStorage.getItem("cart");
+    if (cartItems) {
+        const cartItemsArray = JSON.parse(cartItems);
+        const item = cartItemsArray.find(
+            (element) => element.productId == productId
+        );
+        if (item) {
+            item.quantity++;
+            window.sessionStorage.setItem(
+                "cart",
+                JSON.stringify(cartItemsArray)
+            );
+        }
+    }
+    displayCartItems();
 };
 
 const deleteItemFromCart = (productId) => {
