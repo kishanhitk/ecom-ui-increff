@@ -18,7 +18,8 @@ const displayCartItems = async () => {
                     <div>
 
                         <h5 class="card-title">${product.name}</h5>
-                        <h6>${product.brandId}</h6>
+                        <h6 class="text-secondary">By ${product.brandId}</h6>
+                        <h6 class="card-title">Rate: Rs. ${product.mrp}</h6>
                     </div>
                     <div class="input-group w-auto justify-content-end align-items-center">
                     <button class="btn btn-light mx-3" onclick='decrementQuantity("${product.id}")' >-</button>

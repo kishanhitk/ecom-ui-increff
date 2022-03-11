@@ -9,6 +9,7 @@ const populateData = async () => {
         $("#product_detail").hide();
         $("#product_not_found").removeClass("d-none");
     } else {
+        document.title = product.name + " | Increff Ecom";
         $("#product_name").text(product.name);
         $("#product_mrp").text(`Rs. ${product.mrp}`);
         $("#product_image").attr("src", product.imageUrl);
