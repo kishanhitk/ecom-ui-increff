@@ -20,9 +20,9 @@ const displayCartItems = async () => {
                         <h5 class="card-title">${product.name}</h5>
                         <h6>${product.brandId}</h6>
                     </div>
-                    <div class="row align-items-center align-content-center">
+                    <div class="input-group w-auto justify-content-end align-items-center">
                     <button class="btn btn-light mx-3" onclick='decrementQuantity("${product.id}")' >-</button>
-                    <p>${item.quantity}</p>
+                    <p class="my-auto">${item.quantity}</p>
                     <button class="btn btn-light mx-3" onclick='incrementQuantity("${product.id}")' >+</button>
 </div>                    <button class="btn" onClick='deleteItemFromCart("${product.id}")'>
                         <i class="material-icons">delete</i>
