@@ -1,6 +1,7 @@
 const populateData = async () => {
+    console.log("Populating Data");
     const productId = window.location.search.split("=")[1];
-    const resp = await fetch(`./assets/inventory.json`);
+    const resp = await fetch(`/assets/inventory.json`);
     const json = await resp.json();
     const product = json.find((element) => element.id == productId);
 
