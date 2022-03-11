@@ -23,8 +23,8 @@ const addToCart = async () => {
     const quantity = $("#quantity").val();
 
     const productId = window.location.search.split("=")[1];
-    // Get existing cart object if any from sessionStorage
-    let cart = window.sessionStorage.getItem("cart");
+    // Get existing cart object if any from localStorage
+    let cart = window.localStorage.getItem("cart");
     cart = cart ? JSON.parse(cart) : [];
     // Find if product already exists in cart
     const existingProduct = cart.find(
@@ -38,8 +38,8 @@ const addToCart = async () => {
         // If product does not exist, add product to cart
         cart.push({ productId, quantity });
     }
-    // Update cart in sessionStorage
-    window.sessionStorage.setItem("cart", JSON.stringify(cart));
+    // Update cart in localStorage
+    window.localStorage.setItem("cart", JSON.stringify(cart));
     $.notify("Item added to cart", "success");
     // Update cart count in header
     const cartCount = cart.reduce((acc, element) => acc + element.quantity, 0);

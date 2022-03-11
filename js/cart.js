@@ -1,7 +1,7 @@
 const displayCartItems = async () => {
     const cartItemsList = $("#cart_items");
     cartItemsList.empty();
-    const cartItems = window.sessionStorage.getItem("cart");
+    const cartItems = window.localStorage.getItem("cart");
     if (cartItems) {
         const cartItemsArray = JSON.parse(cartItems);
         const resp = await fetch("/assets/inventory.json");
@@ -36,7 +36,7 @@ const displayCartItems = async () => {
     }
 };
 const decrementQuantity = (productId) => {
-    const cartItems = window.sessionStorage.getItem("cart");
+    const cartItems = window.localStorage.getItem("cart");
     if (cartItems) {
         const cartItemsArray = JSON.parse(cartItems);
         const item = cartItemsArray.find(
@@ -48,17 +48,14 @@ const decrementQuantity = (productId) => {
             } else {
                 cartItemsArray.splice(cartItemsArray.indexOf(item), 1);
             }
-            window.sessionStorage.setItem(
-                "cart",
-                JSON.stringify(cartItemsArray)
-            );
+            window.localStorage.setItem("cart", JSON.stringify(cartItemsArray));
         }
     }
     displayCartItems();
 };
 
 const incrementQuantity = (productId) => {
-    const cartItems = window.sessionStorage.getItem("cart");
+    const cartItems = window.localStorage.getItem("cart");
     if (cartItems) {
         const cartItemsArray = JSON.parse(cartItems);
         const item = cartItemsArray.find(
@@ -66,23 +63,20 @@ const incrementQuantity = (productId) => {
         );
         if (item) {
             item.quantity++;
-            window.sessionStorage.setItem(
-                "cart",
-                JSON.stringify(cartItemsArray)
-            );
+            window.localStorage.setItem("cart", JSON.stringify(cartItemsArray));
         }
     }
     displayCartItems();
 };
 
 const deleteItemFromCart = (productId) => {
-    const cartItems = window.sessionStorage.getItem("cart");
+    const cartItems = window.localStorage.getItem("cart");
     if (cartItems) {
         const cartItemsArray = JSON.parse(cartItems);
         const newCartItems = cartItemsArray.filter(
             (item) => item.productId != productId
         );
-        window.sessionStorage.setItem("cart", JSON.stringify(newCartItems));
+        window.localStorage.setItem("cart", JSON.stringify(newCartItems));
     }
     displayCartItems();
 };
