@@ -87,22 +87,8 @@ const deleteItemFromCart = (productId) => {
     displayCartItems();
 };
 
-const logout = () => {
-    window.sessionStorage.removeItem("user");
-    window.location.href = "./login.html";
-};
-const checkLoginState = () => {
-    const loginButton = $("#login_button");
-    const logoutButton = $("#logout_button");
-    console.log(window.sessionStorage.getItem("user"));
-    window.sessionStorage.getItem("user")
-        ? loginButton.hide()
-        : logoutButton.hide();
-};
 function init() {
-    checkLoginState();
     displayCartItems();
-    $("#logout_button").on("click", logout);
 }
 
 $(document).ready(init);

@@ -18,18 +18,6 @@ const populateData = async () => {
         $("#product_style_id").append(product.styleId);
     }
 };
-const logout = () => {
-    window.sessionStorage.removeItem("user");
-    window.location.href = "./login.html";
-};
-const checkLoginState = () => {
-    const loginButton = $("#login_button");
-    const logoutButton = $("#logout_button");
-    console.log(window.sessionStorage.getItem("user"));
-    window.sessionStorage.getItem("user")
-        ? loginButton.hide()
-        : logoutButton.hide();
-};
 
 const addToCart = async () => {
     const quantity = $("#quantity").val();
@@ -53,15 +41,13 @@ const addToCart = async () => {
     // Update cart in sessionStorage
     window.sessionStorage.setItem("cart", JSON.stringify(cart));
     $.notify("Item added to cart", "success");
-    // // Update cart count in header
+    // Update cart count in header
     const cartCount = cart.reduce((acc, element) => acc + element.quantity, 0);
     $("#cart_count").text(cartCount);
 };
 
 function init() {
     populateData();
-    checkLoginState();
-    $("#logout_button").click(logout);
     $("#add_to_cart").submit((event) => {
         event.preventDefault();
         addToCart(event);
