@@ -1,12 +1,5 @@
 const displayCartItems = async () => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-        window.location.href = "/html/login.html";
-        return;
-    }
-    const userId = JSON.parse(user).email;
-    let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
-    let cartItems = cartMap.hasOwnProperty(userId) ? cartMap[userId] : [];
+    let cartItems = getUserCart();
     const cartItemsList = $("#cart_items");
     cartItemsList.empty();
     if (cartItems) {
@@ -55,9 +48,9 @@ const displayCartItems = async () => {
     }
 };
 const decrementQuantity = (productId) => {
-    const cartItems = window.localStorage.getItem("cart");
+    const cartItems = getUserCart();
     if (cartItems) {
-        const cartItemsArray = JSON.parse(cartItems);
+        const cartItemsArray = cartItems;
         const item = cartItemsArray.find(
             (element) => element.productId == productId
         );
@@ -67,41 +60,42 @@ const decrementQuantity = (productId) => {
             } else {
                 cartItemsArray.splice(cartItemsArray.indexOf(item), 1);
             }
-            window.localStorage.setItem("cart", JSON.stringify(cartItemsArray));
+            updateUserCart(cartItemsArray);
         }
     }
     displayCartItems();
 };
 
 const incrementQuantity = (productId) => {
-    const cartItems = window.localStorage.getItem("cart");
+    const cartItems = getUserCart();
     if (cartItems) {
-        const cartItemsArray = JSON.parse(cartItems);
+        const cartItemsArray = cartItems;
         const item = cartItemsArray.find(
             (element) => element.productId == productId
         );
         if (item) {
             item.quantity++;
-            window.localStorage.setItem("cart", JSON.stringify(cartItemsArray));
+            updateUserCart(cartItemsArray);
         }
     }
     displayCartItems();
 };
 
 const deleteItemFromCart = (productId) => {
-    const cartItems = window.localStorage.getItem("cart");
+    const cartItems = getUserCart();
     if (cartItems) {
-        const cartItemsArray = JSON.parse(cartItems);
+        const cartItemsArray = cartItems;
         const newCartItems = cartItemsArray.filter(
             (item) => item.productId != productId
         );
-        window.localStorage.setItem("cart", JSON.stringify(newCartItems));
+        updateUserCart(newCartItems);
     }
     displayCartItems();
 };
 
 function init() {
     displayCartItems();
+    helloWord();
 }
 
 $(document).ready(init);

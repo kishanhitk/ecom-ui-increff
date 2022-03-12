@@ -25,14 +25,7 @@ const addToCart = async () => {
 
     const productId = window.location.search.split("=")[1];
     // Get existing cartMap object if any from localStorage
-    const user = localStorage.getItem("user");
-    if (!user) {
-        window.location.href = "/html/login.html";
-        return;
-    }
-    const userId = JSON.parse(user).email;
-    let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
-    let userCart = cartMap.hasOwnProperty(userId) ? cartMap[userId] : [];
+    let userCart = getUserCart();
     // Find if product already exists in userCart
     const existingProduct = userCart.find(
         (element) => element.productId == productId
@@ -46,8 +39,7 @@ const addToCart = async () => {
         userCart.push({ productId, quantity });
     }
     // Update userCart in localStorage
-    cartMap[userId] = userCart;
-    window.localStorage.setItem("cartMap", JSON.stringify(cartMap));
+    updateUserCart(userCart);
     $.notify("Item added to cart", "success");
     // Update cartMap count in header
     const cartCount = userCart.reduce(
