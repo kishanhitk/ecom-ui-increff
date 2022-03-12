@@ -1,9 +1,16 @@
 const displayCartItems = async () => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+        window.location.href = "/html/login.html";
+        return;
+    }
+    const userId = JSON.parse(user).email;
+    let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
+    let cartItems = cartMap.hasOwnProperty(userId) ? cartMap[userId] : [];
     const cartItemsList = $("#cart_items");
     cartItemsList.empty();
-    const cartItems = window.localStorage.getItem("cart");
     if (cartItems) {
-        const cartItemsArray = JSON.parse(cartItems);
+        const cartItemsArray = cartItems;
         const resp = await fetch("/assets/inventory.json");
         const json = await resp.json();
         cartItemsArray.forEach((item) => {
