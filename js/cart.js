@@ -12,22 +12,33 @@ const displayCartItems = async () => {
             );
             const itemElement = `
             <div class="card my-3">
-            <div class="card-body">
-                <div class="d-flex align-items-center  justify-content-between">
-                    <img src="${product.imageUrl}"  />
-                    <div>
-
+            <div class="card-header bg-transparent border-bottom-0">
+            <button class="btn close"
+                        onClick='deleteItemFromCart("${product.id}")'>
+                        <i class="material-icons">delete</i>
+                    </button>
+          </div>
+            <div class="card-body mt-n5">
+                <div class="row">
+                    <img class="col-auto" src="${product.imageUrl}" />
+                    <div class="col">
                         <h5 class="card-title">${product.name}</h5>
                         <h6 class="text-secondary">By ${product.brandId}</h6>
                         <h6 class="card-title">Rate: Rs. ${product.mrp}</h6>
                     </div>
-                    <div class="input-group w-auto justify-content-end align-items-center">
-                    <button class="btn btn-light mx-3" onclick='decrementQuantity("${product.id}")' >-</button>
-                    <p class="my-auto">${item.quantity}</p>
-                    <button class="btn btn-light mx-3" onclick='incrementQuantity("${product.id}")' >+</button>
-</div>                    <button class="btn" onClick='deleteItemFromCart("${product.id}")'>
-                        <i class="material-icons">delete</i>
-                    </button>
+                    <div class="col input-group col w-auto justify-content-end align-items-center">
+                        <button ${
+                            item.quantity <= 1 && "disabled"
+                        } class="btn btn-light mx-3"
+                            onclick='decrementQuantity("${
+                                product.id
+                            }")'>-</button>
+                        <p class="my-auto">${item.quantity}</p>
+                        <button class="btn btn-light mx-3"
+                            onclick='incrementQuantity("${
+                                product.id
+                            }")'>+</button>
+                    </div>
                 </div>
             </div>
         </div>
