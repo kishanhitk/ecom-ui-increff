@@ -16,7 +16,7 @@ const populateData = async () => {
         $("#product_description").text(product.description);
         $("#product_category").append(product.category);
         $("#product_brand").append(product.brandId);
-        $("#product_style_id").append(product.styleId);
+        $("#product_storage").append(product.storage);
     }
 };
 

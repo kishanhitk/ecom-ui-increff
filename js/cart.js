@@ -8,7 +8,7 @@ const displayCartItems = async () => {
         const json = await resp.json();
         cartItemsArray.forEach((item) => {
             const product = json.find(
-                (element) => element.id == item.productId
+                (element) => element.id === item.productId
             );
             const itemElement = `
             <div class="card my-3">
