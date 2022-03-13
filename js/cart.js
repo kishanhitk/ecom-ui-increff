@@ -22,9 +22,9 @@ const displayCartItems = async () => {
                 <div class="row">
                     <img class="col-auto" src="${product.imageUrl}" />
                     <div class="col">
-                        <h5 class="card-title">${product.name}</h5>
-                        <h6 class="text-secondary">By ${product.brandId}</h6>
-                        <h6 class="card-title">Rate: Rs. ${product.mrp}</h6>
+                        <h3 class="card-title">${product.name}</h3>
+                        <h5 class="text-secondary">By ${product.brandId}</h5>
+                        <h4 class="card-title">Rate: Rs. ${product.mrp}</h4>
                     </div>
                     <div class="col input-group col w-auto justify-content-end align-items-center">
                         <button ${
@@ -45,8 +45,52 @@ const displayCartItems = async () => {
             `;
             cartItemsList.append(itemElement);
         });
+        displayBillDetails(cartItems);
     }
 };
+
+const displayBillDetails = (cartItems) => {
+    const billDetailsTable = $("#bill_details_table");
+    billDetailsTable.find("tbody").empty();
+    let billTotal = 0;
+    const cartItemsArray = cartItems;
+    const resp = fetch("/assets/inventory.json");
+    resp.then((response) => {
+        response.json().then((json) => {
+            cartItemsArray.forEach((item) => {
+                const product = json.find(
+                    (element) => element.id === item.productId
+                );
+                const itemElement = `
+                    <tr>
+                        <td>${product.name}</td>
+                        <td>${product.mrp}</td>
+                        <td>${item.quantity}</td>
+                        <td>${product.mrp * item.quantity}</td>
+                    </tr>
+                    `;
+                billDetailsTable.find("tbody").append(itemElement);
+                billTotal += product.mrp * item.quantity;
+            });
+            billDetailsTable.find("tfoot").empty();
+            const billTotalElement = `
+                <tr>
+                    
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                    <strong>
+                    Rs. ${billTotal}
+                    </strong>
+                    </td>
+                </tr>
+                `;
+            billDetailsTable.find("tfoot").append(billTotalElement);
+        });
+    });
+};
+
 const decrementQuantity = (productId) => {
     const cartItems = getUserCart();
     if (cartItems) {
@@ -95,6 +139,7 @@ const deleteItemFromCart = (productId) => {
 
 function init() {
     displayCartItems();
+    displayBillDetails();
     helloWord();
 }
 
