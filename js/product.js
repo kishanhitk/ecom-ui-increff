@@ -6,6 +6,7 @@ const populateData = async () => {
     const product = json.find((element) => element.id == productId);
 
     if (product == undefined) {
+        document.title = "Product Not Found | Increff Ecom";
         $("#product_detail").hide();
         $("#product_not_found").removeClass("d-none");
     } else {
