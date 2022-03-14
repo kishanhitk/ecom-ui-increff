@@ -33,7 +33,7 @@ const displayCartItems = async () => {
                             onclick='decrementQuantity("${
                                 product.id
                             }")'>-</button>
-                        <p class="my-auto">${item.quantity}</p>
+                        <h5  class="my-auto">${item.quantity}</h5>
                         <button class="btn btn-light mx-3"
                             onclick='incrementQuantity("${
                                 product.id
