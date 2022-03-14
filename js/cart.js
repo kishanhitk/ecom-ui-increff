@@ -140,7 +140,6 @@ const deleteItemFromCart = (productId) => {
 function init() {
     displayCartItems();
     displayBillDetails();
-    helloWord();
 }
 
 $(document).ready(init);

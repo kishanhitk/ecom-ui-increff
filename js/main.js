@@ -16,6 +16,32 @@ function init() {
     $("#logout_button").on("click", logout);
 }
 
+const addToCart = async (productId, quantity) => {
+    // Get existing cartMap object if any from localStorage
+    let userCart = getUserCart();
+    // Find if product already exists in userCart
+    const existingProduct = userCart.find(
+        (element) => element.productId == productId
+    );
+    if (existingProduct) {
+        // If product already exists, increment quantity
+        existingProduct.quantity =
+            parseInt(existingProduct.quantity) + parseInt(quantity);
+    } else {
+        // If product does not exist, add product to userCart
+        userCart.push({ productId, quantity });
+    }
+    // Update userCart in localStorage
+    updateUserCart(userCart);
+    $.notify("Item added to cart", "success");
+    // Update cartMap count in header
+    const cartCount = userCart.reduce(
+        (acc, element) => acc + element.quantity,
+        0
+    );
+    $("#cart_count").text(cartCount);
+};
+
 const getUser = () => {
     const user = window.localStorage.getItem("user");
     if (!user) {
@@ -40,6 +66,3 @@ const updateUserCart = (cartItems) => {
 };
 
 $(document).ready(init);
-const helloWord = () => {
-    console.log("Hello World");
-};

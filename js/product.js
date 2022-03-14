@@ -21,40 +21,17 @@ const populateData = async () => {
     }
 };
 
-const addToCart = async () => {
+const addProductToCart = async () => {
     const quantity = $("#quantity").val();
-
     const productId = window.location.search.split("=")[1];
-    // Get existing cartMap object if any from localStorage
-    let userCart = getUserCart();
-    // Find if product already exists in userCart
-    const existingProduct = userCart.find(
-        (element) => element.productId == productId
-    );
-    if (existingProduct) {
-        // If product already exists, increment quantity
-        existingProduct.quantity =
-            parseInt(existingProduct.quantity) + parseInt(quantity);
-    } else {
-        // If product does not exist, add product to userCart
-        userCart.push({ productId, quantity });
-    }
-    // Update userCart in localStorage
-    updateUserCart(userCart);
-    $.notify("Item added to cart", "success");
-    // Update cartMap count in header
-    const cartCount = userCart.reduce(
-        (acc, element) => acc + element.quantity,
-        0
-    );
-    $("#cart_count").text(cartCount);
+    await addToCart(productId, quantity);
 };
 
 function init() {
     populateData();
     $("#add_to_cart").submit((event) => {
         event.preventDefault();
-        addToCart(event);
+        addProductToCart();
     });
 }
 

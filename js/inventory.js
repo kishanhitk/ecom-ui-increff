@@ -4,18 +4,25 @@ const getData = async () => {
     const json = await resp.json();
     json.forEach((element) => {
         const product = $(`
-        <a href="/html/product.html?id=${element.id}" class="col-3 border m-5 text-center text-reset text-decoration-none">
-          <div class="row">
-            <div class="col-10  mx-auto p-4">
-              <img class="img-fluid  rounded img-thumbnail p-3 border-0 shadow-sm" src=${element.imageUrl}
-                alt=${element.name}>
-            </div>
-            <div class="col-12">
-              <h4>${element.name}</h4>
-              <h6>MRP: Rs.${element.mrp}</h6>
-            </div>
-          </div>
+        <div class="col-12 col-sm-6 col-md-6 item_card  col-lg-3 border rounded-lg text-center">
+        <div >
+        <a href="/html/product.html?id=${
+            element.id
+        }" class=" text-reset text-decoration-none">
+        <div class="mx-auto p-4">
+          <img class="img-fluid p-3" src=${element.imageUrl}
+            alt=${element.name}>
+        </div>
+        <div>
+        <h4>${element.name}</h4>
+        <h6>MRP: Rs.${element.mrp}</h6>
         </a>
+          <button class="btn btn-primary mb-3" onclick='addToCart("${
+              element.id
+          }","${1}")'>Add to cart</button>
+        </div>
+      </div>
+        </div>
         `);
         productGrid.append(product);
     });
