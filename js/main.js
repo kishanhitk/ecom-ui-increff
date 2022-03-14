@@ -14,7 +14,16 @@ function init() {
     console.log("init");
     checkLoginState();
     $("#logout_button").on("click", logout);
+    updateCartQuantityHeader();
 }
+
+const updateCartQuantityHeader = () => {
+    const cartCount = getUserCart().reduce(
+        (acc, element) => Number(acc) + Number(element.quantity),
+        0
+    );
+    $("#cart_count").text(cartCount);
+};
 
 const addToCart = async (productId, quantity) => {
     // Get existing cartMap object if any from localStorage
@@ -35,11 +44,7 @@ const addToCart = async (productId, quantity) => {
     updateUserCart(userCart);
     $.notify("Item added to cart", "success");
     // Update cartMap count in header
-    const cartCount = userCart.reduce(
-        (acc, element) => acc + element.quantity,
-        0
-    );
-    $("#cart_count").text(cartCount);
+    updateCartQuantityHeader();
 };
 
 const getUser = () => {
