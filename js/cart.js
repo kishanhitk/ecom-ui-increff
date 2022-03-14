@@ -14,7 +14,7 @@ const displayCartItems = async () => {
             <div class="card my-3">
             <div class="card-header bg-transparent border-bottom-0">
             <button class="btn close"
-                        onClick='deleteItemFromCart("${product.id}")'>
+                        onClick='showDeleteItemModal("${product.id}")'>
                         <i class="material-icons">delete</i>
                     </button>
           </div>
@@ -127,7 +127,18 @@ const incrementQuantity = (productId) => {
     updateCartQuantityHeader();
 };
 
-const deleteItemFromCart = (productId) => {
+const showDeleteItemModal = (productId) => {
+    $("#delete_item_modal").modal("show");
+    $("#delete_item_modal").find("input[name='data-item-id']").val(productId);
+};
+
+const deleteItemFromCart = () => {
+    console.log("delete item from cart");
+    const productId = $("#delete_item_modal")
+        .find("input[name='data-item-id']")
+        .val();
+    console.log(productId);
+    $("#delete_item_modal").modal("show");
     const cartItems = getUserCart();
     if (cartItems) {
         const cartItemsArray = cartItems;
@@ -137,6 +148,8 @@ const deleteItemFromCart = (productId) => {
         updateUserCart(newCartItems);
     }
     displayCartItems();
+    updateCartQuantityHeader();
+    $("#delete_item_modal").modal("hide");
 };
 
 function init() {
