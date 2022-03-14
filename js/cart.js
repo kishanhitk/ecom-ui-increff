@@ -108,6 +108,7 @@ const decrementQuantity = (productId) => {
         }
     }
     displayCartItems();
+    updateCartQuantityHeader();
 };
 
 const incrementQuantity = (productId) => {
@@ -123,6 +124,7 @@ const incrementQuantity = (productId) => {
         }
     }
     displayCartItems();
+    updateCartQuantityHeader();
 };
 
 const deleteItemFromCart = (productId) => {
