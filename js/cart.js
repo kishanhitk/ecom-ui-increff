@@ -11,6 +11,7 @@ const displayCartItems = async () => {
         const cartItemsArray = cartItems;
         const resp = await fetch("/assets/inventory.json");
         const json = await resp.json();
+
         cartItemsArray.forEach((item) => {
             const product = json.find(
                 (element) => element.id === item.productId
@@ -157,9 +158,34 @@ const deleteItemFromCart = () => {
     $("#delete_item_modal").modal("hide");
 };
 
+const placeOrder = async () => {
+    const cartItems = getUserCart();
+    if (cartItems && cartItems.length > 0) {
+        const resp = await fetch("/assets/inventory.json");
+        const json = await resp.json();
+        // Convert cart items to CSV
+        let csv = Papa.unparse(
+            cartItems.map((item) => {
+                const product = json.find(
+                    (element) => element.id === item.productId
+                );
+                return {
+                    product: product.name,
+                    productId: product.id,
+                    brand: product.brandId,
+                    price: product.mrp,
+                    quantity: item.quantity,
+                    total: product.mrp * item.quantity,
+                };
+            })
+        );
+    }
+};
+
 function init() {
     displayCartItems();
     displayBillDetails();
+    $("#place_order_button").click(placeOrder);
 }
 
 $(document).ready(init);
