@@ -42,7 +42,11 @@ const addToCart = async (productId, quantity) => {
     }
     // Update userCart in localStorage
     updateUserCart(userCart);
-    $.notify("Item added to cart", "success");
+    // !Removing notification temporarily
+    $.notify("Item added to cart", {
+        position: "bottom right",
+        className: "success",
+    });
     // Update cartMap count in header
     updateCartQuantityHeader();
 };
