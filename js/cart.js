@@ -179,6 +179,18 @@ const placeOrder = async () => {
                 };
             })
         );
+        let blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        let fileUrl;
+
+        if (navigator.msSaveBlob) {
+            fileUrl = navigator.msSaveBlob(blob, "invoice.csv");
+        } else {
+            fileUrl = window.URL.createObjectURL(blob);
+        }
+        var tempLink = document.createElement("a");
+        tempLink.href = fileUrl;
+        tempLink.setAttribute("download", "invoice.csv");
+        tempLink.click();
     }
 };
 
