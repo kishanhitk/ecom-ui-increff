@@ -3,6 +3,11 @@ const displayCartItems = async () => {
     const cartItemsList = $("#cart_items");
     cartItemsList.empty();
     if (cartItems) {
+        if (cartItems.length <= 0) {
+            $("#cart_details").hide();
+            $("#cart_empty").removeClass("d-none");
+        }
+
         const cartItemsArray = cartItems;
         const resp = await fetch("/assets/inventory.json");
         const json = await resp.json();

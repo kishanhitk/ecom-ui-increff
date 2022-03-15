@@ -41,6 +41,18 @@
         </div>
     </nav>
     <div class="container-fluid">
+        <!-- Product not found -->
+        <div id="cart_empty" class="d-none">
+            <div class="row justify-content-center align-items-center col-md-12 vh-100 ">
+                <div class="alert" role="alert">
+                    <div class="d-flex flex-column align-items-center">
+                        <h2 class="alert-heading">Your cart is empty!</h2>
+                        <p>Add products to checkout.</p>
+                        <a href="/index.html" class="btn btn-primary my-1">Go to catalog</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal modal-fade" tabindex="-1" role="dialog" id="delete_item_modal">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -62,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="cart_details">
             <div class="col-12">
                 <h2 class="font-weight-light mt-3 ">Your Cart</h2>
                 <div class="row justify-content-between">
