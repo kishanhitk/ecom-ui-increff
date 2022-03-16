@@ -9,6 +9,10 @@ const populateData = async () => {
         $("#product_detail").hide();
         $("#product_not_found").removeClass("d-none");
     } else {
+        const quantity = getCartQuantity(productId);
+        if (quantity > 0) {
+            $("#already_in_cart_badge").removeClass("d-none");
+        }
         document.title = product.name + " | Increff Ecom";
         $("#product_name").text(product.name);
         $("#product_mrp").text(`Rs. ${product.mrp}`);
