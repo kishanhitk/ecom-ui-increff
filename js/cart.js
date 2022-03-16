@@ -139,11 +139,10 @@ const showDeleteItemModal = (productId) => {
 };
 
 const deleteItemFromCart = () => {
-    console.log("delete item from cart");
     const productId = $("#delete_item_modal")
         .find("input[name='data-item-id']")
         .val();
-    console.log(productId);
+
     $("#delete_item_modal").modal("show");
     const cartItems = getUserCart();
     if (cartItems) {

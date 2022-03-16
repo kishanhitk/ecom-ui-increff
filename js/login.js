@@ -14,7 +14,7 @@ const login = async (e) => {
         window.localStorage.setItem("user", JSON.stringify(user));
         window.location.href = "/index.html";
     }
-    console.log(json);
+
     return false;
 };
 
