@@ -80,4 +80,10 @@ const clearCartForCurrentUser = () => {
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
 };
 
+const getCartQuantity = (productId) => {
+    const userCart = getUserCart();
+    const cartItem = userCart.find((element) => element.productId == productId);
+    return cartItem ? cartItem.quantity : 0;
+};
+
 $(document).ready(init);
