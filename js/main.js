@@ -73,4 +73,11 @@ const updateUserCart = (cartItems) => {
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
 };
 
+const clearCartForCurrentUser = () => {
+    const userId = getUser().email;
+    let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
+    cartMap[userId] = [];
+    localStorage.setItem("cartMap", JSON.stringify(cartMap));
+};
+
 $(document).ready(init);

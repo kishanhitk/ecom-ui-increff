@@ -162,6 +162,8 @@ const placeOrder = async () => {
     if (cartItems && cartItems.length > 0) {
         const resp = await fetch("/assets/inventory.json");
         const json = await resp.json();
+
+        $("#success_modal").modal("show");
         // Convert cart items to CSV
         let csv = Papa.unparse(
             cartItems.map((item) => {
@@ -190,6 +192,9 @@ const placeOrder = async () => {
         tempLink.href = fileUrl;
         tempLink.setAttribute("download", "invoice.csv");
         tempLink.click();
+
+        // Clear cart after order
+        clearCartForCurrentUser();
     }
 };
 
