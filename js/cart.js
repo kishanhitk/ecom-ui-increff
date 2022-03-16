@@ -63,7 +63,7 @@ const displayBillDetails = (cartItems) => {
     const resp = fetch("/assets/inventory.json");
     resp.then((response) => {
         response.json().then((json) => {
-            cartItemsArray.forEach((item) => {
+            cartItemsArray?.forEach((item) => {
                 const product = json.find(
                     (element) => element.id === item.productId
                 );
