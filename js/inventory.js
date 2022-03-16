@@ -2,7 +2,21 @@ const getData = async () => {
     const productGrid = $("#product_grid");
     const resp = await fetch("./assets/inventory.json");
     const json = await resp.json();
-    json.forEach((element) => {
+    const sortBy = $("#sort_by").val();
+
+    productGrid.empty();
+
+    const isLowToHigh = sortBy === "price_low_high";
+
+    const sorted = json.sort((a, b) => {
+        if (isLowToHigh) {
+            return a.mrp - b.mrp;
+        } else {
+            return b.mrp - a.mrp;
+        }
+    });
+    console.log(sorted);
+    sorted.forEach((element) => {
         const product = $(`
         <div class="col-12 col-sm-6 col-md-6 item_card  col-lg-3 border rounded-lg text-center">
         <div >
@@ -30,6 +44,7 @@ const getData = async () => {
 
 function init() {
     getData();
+    $("#sort_by").on("change", getData);
 }
 
 $(document).ready(init);
