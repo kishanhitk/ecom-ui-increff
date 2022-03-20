@@ -17,7 +17,8 @@ const getData = async () => {
     });
     sorted.forEach((element) => {
         const product = $(`
-        <div class="col-12 col-sm-6 col-md-6 item_card  col-lg-3 border rounded-lg text-center">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 p-4">
+        <div class="item_card shadow rounded-lg text-center">
         <div >
         <a href="/html/product.html?id=${
             element.id
@@ -35,6 +36,7 @@ const getData = async () => {
           }","${1}")'>Add to cart</button>
         </div>
       </div>
+        </div>
         </div>
         `);
         productGrid.append(product);
