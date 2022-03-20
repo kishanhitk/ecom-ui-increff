@@ -16,9 +16,10 @@ const getData = async () => {
         }
     });
     sorted.forEach((element) => {
+        const cartQuantity = getCartQuantity(element.id);
         const product = $(`
         <div class="col-12 col-sm-6 col-md-6 col-lg-3 p-4">
-        <div class="item_card shadow rounded-lg text-center">
+        <div class="item_card shadow rounded-lg text-center position-relative">
         <div >
         <a href="/html/product.html?id=${
             element.id
@@ -26,11 +27,16 @@ const getData = async () => {
         <div class="mx-auto p-4">
           <img class="img-fluid p-3" src=${element.imageUrl}
             alt=${element.name}>
+            ${
+                cartQuantity > 0
+                    ? `<div class="badge badge-success ribbon position-absolute">Already in cart</div>`
+                    : ""
+            }
         </div>
+        </a>
         <div>
         <h4>${element.name}</h4>
         <h6>MRP: Rs.${element.mrp}</h6>
-        </a>
           <button class="btn btn-primary mb-3" onclick='addToCart("${
               element.id
           }","${1}")'>Add to cart</button>
