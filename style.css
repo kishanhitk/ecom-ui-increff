@@ -7,6 +7,10 @@ body {
   margin-bottom: 60px;
 }
 
+.logo {
+  filter: brightness(0) invert(1);
+}
+
 .container-fluid {
   max-width: 1800px;
 }

@@ -15,7 +15,6 @@ const getData = async () => {
             return b.mrp - a.mrp;
         }
     });
-    console.log(sorted);
     sorted.forEach((element) => {
         const product = $(`
         <div class="col-12 col-sm-6 col-md-6 item_card  col-lg-3 border rounded-lg text-center">
