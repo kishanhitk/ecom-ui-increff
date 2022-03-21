@@ -44,7 +44,6 @@ const addToCart = async (productId, quantity) => {
     updateUserCart(userCart);
     // !Removing notification temporarily
     $.notify("Item added to cart", {
-        position: "bottom right",
         className: "success",
     });
     // Update cartMap count in header

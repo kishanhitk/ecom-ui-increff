@@ -37,3 +37,6 @@ body {
   overflow: hidden;
   text-align: right;
 }
+.notifyjs-corner {
+  top: 50px !important;
+}
