@@ -171,8 +171,8 @@ const placeOrder = async () => {
                     (element) => element.id === item.productId
                 );
                 return {
-                    product: product.name,
                     productId: product.id,
+                    productName: product.name,
                     brand: product.brandId,
                     price: product.mrp,
                     quantity: item.quantity,

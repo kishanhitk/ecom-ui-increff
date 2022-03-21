@@ -81,8 +81,6 @@ const clearCartForCurrentUser = () => {
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
 };
 
-
-
 const showLiveDateTime = () => {
     const date = new Date();
     const dateTime = $("#date_time");
@@ -107,5 +105,16 @@ const getCartQuantity = (productId) => {
     const cartItem = userCart.find((element) => element.productId == productId);
     return cartItem ? cartItem.quantity : 0;
 };
+
+function readFileData(file, callback) {
+    var config = {
+        header: true,
+        skipEmptyLines: "greedy",
+        complete: function (results) {
+            callback(results);
+        },
+    };
+    Papa.parse(file, config);
+}
 
 $(document).ready(init);
