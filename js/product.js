@@ -30,6 +30,19 @@ const addProductToCart = async () => {
     await addToCart(productId, quantity);
 };
 
+const incrementQuantity = () => {
+    const $quantity = $("#quantity");
+    let currentQuantity = Number($quantity.text());
+    $quantity.html(currentQuantity + 1);
+};
+
+const decrementQuantity = () => {
+    const $quantity = $("#quantity");
+    let currentQuantity = Number($quantity.text());
+    if (currentQuantity <= 1) return;
+    $quantity.html(currentQuantity - 1);
+};
+
 function init() {
     populateData();
     $("#add_to_cart").submit((event) => {

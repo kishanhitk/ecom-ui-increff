@@ -42,5 +42,16 @@
     "storage": "128GB",
     "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia fugit explicabo a inventore facilis earum corrupti neque pariatur praesentium rerum vitae odit ab necessitatibus minima possimus, magnam, aperiam totam libero? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae a dignissimos at fuga! Saepe accusamus, ipsum ab officia fugiat architecto veniam explicabo cum repellendus reprehenderit voluptatum culpa et ea. Neque. ",
     "id": "iphone-13-mini-midnight"
+  },
+  {
+    "brandId": "Apple",
+    "category": "Smartphone",
+    "color": "Green",
+    "imageUrl": "https://rukminim1.flixcart.com/image/416/416/l0igvww0/mobile/2/g/r/-original-imagca5kqvhuscnv.jpeg?q=70",
+    "mrp": 123999,
+    "name": "iPhone 13 Pro Max (Green, 512 GB)",
+    "storage": "512GB",
+    "description": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia fugit explicabo a inventore facilis earum corrupti neque pariatur praesentium rerum vitae odit ab necessitatibus minima possimus, magnam, aperiam totam libero? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae a dignissimos at fuga! Saepe accusamus, ipsum ab officia fugiat architecto veniam explicabo cum repellendus reprehenderit voluptatum culpa et ea. Neque. ",
+    "id": "iphone-13-pro-max"
   }
 ]
