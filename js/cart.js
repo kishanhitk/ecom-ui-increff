@@ -9,6 +9,7 @@ const displayCartItems = async () => {
         }
 
         const cartItemsArray = cartItems;
+        // TODO move data fetching to main.js
         const resp = await fetch("/assets/inventory.json");
         const json = await resp.json();
 
@@ -16,6 +17,7 @@ const displayCartItems = async () => {
             const product = json.find(
                 (element) => element.id === item.productId
             );
+            // TODO: try to use clone()
             const itemElement = `
             <div class="card my-3">
             <div class="card-header bg-transparent border-bottom-0">
@@ -135,6 +137,7 @@ const incrementQuantity = (productId) => {
 
 const showDeleteItemModal = (productId) => {
     $("#delete_item_modal").modal("show");
+    // TODO: Use data method to set the value of the hidden input
     $("#delete_item_modal").find("input[name='data-item-id']").val(productId);
 };
 
@@ -192,7 +195,8 @@ const placeOrder = async () => {
         tempLink.href = fileUrl;
         tempLink.setAttribute("download", "invoice.csv");
         tempLink.click();
-
+        // TODO: Delete templink after download
+        // TODO: Store selectors in variables
         // Clear cart after order
         clearCartForCurrentUser();
     }

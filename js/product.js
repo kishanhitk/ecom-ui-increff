@@ -1,11 +1,14 @@
 const populateData = async () => {
+    // TODO: CHeck alternate method to get id
+    // TODO: Use URL class to get id
     const productId = window.location.search.split("=")[1];
     const resp = await fetch(`/assets/inventory.json`);
     const json = await resp.json();
     const product = json.find((element) => element.id == productId);
-
+    // TODO: use !product
     if (product == undefined) {
         document.title = "Product Not Found | Increff Ecom";
+        //  TODO: use d-none  class instead of hide()
         $("#product_detail").hide();
         $("#product_not_found").removeClass("d-none");
     } else {
@@ -14,6 +17,7 @@ const populateData = async () => {
             $("#already_in_cart_badge").removeClass("d-none");
         }
         document.title = product.name + " | Increff Ecom";
+        // TODO: Use .find() instead of accessing DOM everytime
         $("#product_name").text(product.name);
         $("#product_mrp").text(`Rs. ${product.mrp}`);
         $("#product_image").attr("src", product.imageUrl);

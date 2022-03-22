@@ -17,6 +17,7 @@
 </head>
 
 <body>
+  <!-- TODO Add d-none by defalt for auth load on all pages -->
 
   <nav class="navbar navbar-expand navbar-dark bg-primary">
 
@@ -33,6 +34,8 @@
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="/html/cart.html"">
+            <!-- TODO! Add tooltip in icons -->
+            <!-- TODO ID should be hyphen separated -->
             <i class=" material-icons">shopping_cart</i><span class="badge badge-light bg-danger text-white"
               id="cart_count""></span>
           </a>
@@ -59,6 +62,7 @@
       </button>
       <div class="d-flex col-7 col-sm-5 col-md-4 col-lg-2 justify-content-center align-items-baseline">
         <label for="sort_by">Sort by:</label>
+        <!-- TODO all col-auto for label remove max width -->
         <select name="sort_by" style="max-width: 70%;" class="form-control ml-2" id="sort_by">
           <option value="name_a_z">Name: A to Z</option>
           <option value="price_low_high">Price: Low to High</option>
@@ -96,6 +100,7 @@
             <form>
               <label for="storage-input">Internal Storage:</label>
               <fieldset id="storage-input">
+                <!-- TODO remove dummy filter if not using clone -->
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="64GB" name="storage-input"
                     checked>
@@ -117,7 +122,6 @@
               </fieldset>
             </form>
           </div>
-          <input type="hidden" name="data-item-id" />
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal" id="apply-filter-btn">Apply</button>

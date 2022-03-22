@@ -19,6 +19,7 @@ const login = async (e) => {
 };
 
 const checkLogin = () => {
+    // TODO Check valid user
     if (window.localStorage.getItem("user"))
         window.location.href = "/index.html";
 };

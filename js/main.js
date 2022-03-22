@@ -5,7 +5,7 @@ const logout = () => {
 const checkLoginState = () => {
     const loginButton = $("#login_button");
     const logoutButton = $("#logout_button");
-
+    // TODO Check if user is valid
     window.localStorage.getItem("user")
         ? loginButton.hide()
         : (logoutButton.hide(), (window.location.href = "/html/login.html"));
@@ -42,7 +42,6 @@ const addToCart = async (productId, quantity) => {
     }
     // Update userCart in localStorage
     updateUserCart(userCart);
-    // !Removing notification temporarily
     $.notify("Item added to cart", {
         className: "success",
     });
@@ -61,6 +60,7 @@ const getUser = () => {
 
 const getUserCart = () => {
     const userId = getUser().email;
+    // TODO try catch JSON.parse
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     let userCart = cartMap.hasOwnProperty(userId) ? cartMap[userId] : [];
     return userCart;
@@ -73,6 +73,7 @@ const updateUserCart = (cartItems) => {
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
 };
 
+// TODO Can be used on cart page
 const clearCartForCurrentUser = () => {
     const userId = getUser().email;
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
@@ -106,6 +107,7 @@ const getCartQuantity = (productId) => {
 };
 
 function readFileData(file, callback) {
+    // TODO Add validatiopn
     var config = {
         header: true,
         skipEmptyLines: "greedy",
@@ -115,5 +117,5 @@ function readFileData(file, callback) {
     };
     Papa.parse(file, config);
 }
-
+// TODO: add fallback for images
 $(document).ready(init);

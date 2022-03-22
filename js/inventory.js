@@ -17,6 +17,7 @@ const displayData = async () => {
     }
     sorted.forEach((element) => {
         const cartQuantity = getCartQuantity(element.id);
+        // TODO Try using clone method
         const product = $(`
         <div class="col-12 col-sm-6 col-md-6 col-lg-3 p-4">
         <div class="item_card shadow rounded-lg text-center position-relative">
