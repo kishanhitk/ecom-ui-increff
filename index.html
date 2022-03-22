@@ -68,44 +68,64 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <div class="row my-4" id="product_grid"></div>
+        <!-- Product not found -->
+        <div id="product_not_found">
+          <div class="row justify-content-center align-items-center col-md-12 vh-100">
+            <div class="alert" role="alert">
+              <div class="d-flex flex-column align-items-center">
+                <h2 class="alert-heading">Oops! No product found with selected combination</h2>
+                <a href="/index.html" class="btn btn-primary my-1">Reload the page.</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row my-4" id="product_grid"></div> -->
       </div>
-      <div class="modal modal-fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-        id="filter_modal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Apply Filters</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <label for="storage-input">Internal Storage:</label>
-                <fieldset id="storage-input">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="64GB"
-                      name="storage-input" checked>
-                    <label class="form-check-label" for="inlineCheckbox1">64GB</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="128GB"
-                      name="storage-input">
-                    <label class="form-check-label" for="inlineCheckbox2">128GB</label>
-                  </div>
-                </fieldset>
-              </form>
-            </div>
-            <input type="hidden" name="data-item-id" />
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" id="apply-filter-btn">Apply</button>
-            </div>
+    </div>
+    <div class="modal modal-fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+      id="filter_modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Apply Filters</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <label for="storage-input">Internal Storage:</label>
+              <fieldset id="storage-input">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="64GB" name="storage-input"
+                    checked>
+                  <label class="form-check-label" for="inlineCheckbox1">64GB</label>
+                </div>
+              </fieldset>
+              <label for="color-input" class="mt-3">Color:</label>
+              <fieldset id="color-input">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Green" name="color-input"
+                    checked>
+                  <label class="form-check-label" for="inlineCheckbox1">Greeen</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="Red"
+                    name="color-input">
+                  <label class="form-check-label" for="inlineCheckbox2">Red</label>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <input type="hidden" name="data-item-id" />
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="apply-filter-btn">Apply</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
   </div>
   <footer class="footer">

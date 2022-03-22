@@ -1,11 +1,20 @@
 const getData = async () => {
-    const productGrid = $("#product_grid");
     const resp = await fetch("./assets/inventory.json");
     const data = await resp.json();
+    return data;
+};
+
+const displayData = async () => {
+    const productGrid = $("#product_grid");
+    productGrid.empty();
+    const data = await getData();
     const filtered = applyFilter(data);
     const sorted = applySort(filtered);
-    productGrid.empty();
-
+    console.log(sorted.length);
+    if (sorted.length == 0) {
+        console.log("remove class");
+        $("#product_not_found").removeClass("d-none");
+    }
     sorted.forEach((element) => {
         const cartQuantity = getCartQuantity(element.id);
         const product = $(`
@@ -41,20 +50,62 @@ const getData = async () => {
 };
 
 const applyFilter = (data) => {
+    let selectedColors = [];
     let selectedStorages = [];
     $.each($("input[name='storage-input']:checked"), function () {
         selectedStorages.push($(this).val());
     });
+    $.each($("input[name='color-input']:checked"), function () {
+        selectedColors.push($(this).val());
+    });
     const filtered = [];
     data.forEach((product) => {
         if (
-            selectedStorages.length === 0 ||
-            selectedStorages.includes(product.storage)
+            (selectedStorages.length === 0 ||
+                selectedStorages.includes(product.storage)) &&
+            (selectedColors.length === 0 ||
+                selectedColors.includes(product.color))
         ) {
             filtered.push(product);
         }
     });
+    console.table(selectedColors);
+    console.table(selectedStorages);
     return filtered;
+};
+
+const populateFilterCheckBoxes = async () => {
+    const data = await getData();
+
+    const storageFilter = $("#storage-input");
+
+    const uniqueStorages = [...new Set(data.map((product) => product.storage))];
+
+    storageFilter.empty();
+    uniqueStorages.forEach((storage) => {
+        const storageFilterGroup = $(`
+        <div class="form-check form-check-inline">
+        <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="${storage}"
+          name="storage-input">
+        <label class="form-check-label" for="inlineCheckbox2">${storage}</label>
+      </div>
+        `);
+        storageFilter.append(storageFilterGroup);
+    });
+
+    const colorFilter = $("#color-input");
+    const uniqueColors = [...new Set(data.map((product) => product.color))];
+    colorFilter.empty();
+    uniqueColors.forEach((color) => {
+        const colorFilterGroup = $(`
+        <div class="form-check form-check-inline">
+        <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="${color}"
+          name="color-input">
+        <label class="form-check-label" for="inlineCheckbox2">${color}</label>
+      </div>
+        `);
+        colorFilter.append(colorFilterGroup);
+    });
 };
 
 const applySort = (data) => {
@@ -74,9 +125,10 @@ const applySort = (data) => {
     return sorted;
 };
 function init() {
-    getData();
-    $("#apply-filter-btn").on("click", getData);
-    $("#sort_by").on("change", getData);
+    populateFilterCheckBoxes();
+    displayData();
+    $("#apply-filter-btn").on("click", displayData);
+    $("#sort_by").on("change", displayData);
 }
 
 $(document).ready(init);
