@@ -60,6 +60,7 @@
       <div class="d-flex col-7 col-sm-5 col-md-4 col-lg-2 justify-content-center align-items-baseline">
         <label for="sort_by">Sort by:</label>
         <select name="sort_by" style="max-width: 70%;" class="form-control ml-2" id="sort_by">
+          <option value="name_a_z">Name: A to Z</option>
           <option value="price_low_high">Price: Low to High</option>
           <option value="price_high_low">Price: High to Low</option>
         </select>
@@ -80,12 +81,26 @@
               </button>
             </div>
             <div class="modal-body">
-              <p id="modal-text">Are you sure you want to remove product from your cart?</p>
+              <form>
+                <label for="storage-input">Internal Storage:</label>
+                <fieldset id="storage-input">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="64GB"
+                      name="storage-input" checked>
+                    <label class="form-check-label" for="inlineCheckbox1">64GB</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="128GB"
+                      name="storage-input">
+                    <label class="form-check-label" for="inlineCheckbox2">128GB</label>
+                  </div>
+                </fieldset>
+              </form>
             </div>
             <input type="hidden" name="data-item-id" />
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Apply</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" id="apply-filter-btn">Apply</button>
             </div>
           </div>
         </div>
