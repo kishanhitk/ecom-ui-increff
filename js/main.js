@@ -2,13 +2,23 @@ const logout = () => {
     window.localStorage.removeItem("user");
     window.location.href = "/html/login.html";
 };
-const checkLoginState = () => {
-    const loginButton = $("#login_button");
-    const logoutButton = $("#logout_button");
+const checkLoginState = async () => {
+    const userFromLocalStoage = getUser();
+    let user;
+    if (userFromLocalStoage) {
+        const resp = await fetch("/assets/users.json");
+        const json = await resp.json();
+        user = json.find((element) => element.email == userFromLocalStoage);
 
-    window.localStorage.getItem("user")
-        ? loginButton.hide()
-        : (logoutButton.hide(), (window.location.href = "/html/login.html"));
+        if (!user || user.length == 0) {
+            window.localStorage.removeItem("user");
+            window.location.href = "/html/login.html";
+        } else {
+            $("#username_display").text(user.name);
+        }
+    }
+    return user;
+    // TODO Check if user is valid
 };
 function init() {
     checkLoginState();
@@ -42,7 +52,6 @@ const addToCart = async (productId, quantity) => {
     }
     // Update userCart in localStorage
     updateUserCart(userCart);
-    // !Removing notification temporarily
     $.notify("Item added to cart", {
         className: "success",
     });
@@ -56,25 +65,31 @@ const getUser = () => {
         window.location.href = "/html/login.html";
         return;
     }
-    return JSON.parse(user);
+    return user;
 };
 
 const getUserCart = () => {
-    const userId = getUser().email;
+    const userId = checkLoginState();
+    if (!userId) return;
+    // TODO try catch JSON.parse
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     let userCart = cartMap.hasOwnProperty(userId) ? cartMap[userId] : [];
     return userCart;
 };
 
 const updateUserCart = (cartItems) => {
-    const userId = getUser().email;
+    const userId = checkLoginState();
+    if (!userId) return;
+
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     cartMap[userId] = cartItems;
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
 };
 
+// TODO Can be used on cart page
 const clearCartForCurrentUser = () => {
-    const userId = getUser().email;
+    const userId = checkLoginState();
+    if (!userId) return;
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     cartMap[userId] = [];
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
@@ -106,6 +121,7 @@ const getCartQuantity = (productId) => {
 };
 
 function readFileData(file, callback) {
+    // TODO Add validatiopn
     var config = {
         header: true,
         skipEmptyLines: "greedy",
@@ -115,5 +131,5 @@ function readFileData(file, callback) {
     };
     Papa.parse(file, config);
 }
-
+// TODO: add fallback for images
 $(document).ready(init);

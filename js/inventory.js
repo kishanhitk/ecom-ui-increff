@@ -1,5 +1,5 @@
 const getData = async () => {
-    const resp = await fetch("./assets/inventory.json");
+    const resp = await fetch("./assets/db/inventory.json");
     const data = await resp.json();
     return data;
 };
@@ -17,6 +17,7 @@ const displayData = async () => {
     }
     sorted.forEach((element) => {
         const cartQuantity = getCartQuantity(element.id);
+        // TODO Try using clone method
         const product = $(`
         <div class="col-12 col-sm-6 col-md-6 col-lg-3 p-4">
         <div class="item_card shadow rounded-lg text-center position-relative">
@@ -29,7 +30,7 @@ const displayData = async () => {
             alt=${element.name}>
             ${
                 cartQuantity > 0
-                    ? `<div class="badge badge-success ribbon position-absolute">Already in cart</div>`
+                    ? `<div class="badge badge-success ribbon position-absolute">${cartQuantity} in cart</div>`
                     : ""
             }
         </div>

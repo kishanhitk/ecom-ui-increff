@@ -9,13 +9,15 @@ const displayCartItems = async () => {
         }
 
         const cartItemsArray = cartItems;
-        const resp = await fetch("/assets/inventory.json");
+        // TODO move data fetching to main.js
+        const resp = await fetch("/assets/db/inventory.json");
         const json = await resp.json();
 
         cartItemsArray.forEach((item) => {
             const product = json.find(
                 (element) => element.id === item.productId
             );
+            // TODO: try to use clone()
             const itemElement = `
             <div class="card my-3">
             <div class="card-header bg-transparent border-bottom-0">
@@ -60,7 +62,7 @@ const displayBillDetails = (cartItems) => {
     billDetailsTable.find("tbody").empty();
     let billTotal = 0;
     const cartItemsArray = cartItems;
-    const resp = fetch("/assets/inventory.json");
+    const resp = fetch("/assets/db/inventory.json");
     resp.then((response) => {
         response.json().then((json) => {
             cartItemsArray?.forEach((item) => {
@@ -135,6 +137,7 @@ const incrementQuantity = (productId) => {
 
 const showDeleteItemModal = (productId) => {
     $("#delete_item_modal").modal("show");
+    // TODO: Use data method to set the value of the hidden input
     $("#delete_item_modal").find("input[name='data-item-id']").val(productId);
 };
 
@@ -160,7 +163,7 @@ const deleteItemFromCart = () => {
 const placeOrder = async () => {
     const cartItems = getUserCart();
     if (cartItems && cartItems.length > 0) {
-        const resp = await fetch("/assets/inventory.json");
+        const resp = await fetch("/assets/db/inventory.json");
         const json = await resp.json();
 
         $("#success_modal").modal("show");
@@ -192,7 +195,8 @@ const placeOrder = async () => {
         tempLink.href = fileUrl;
         tempLink.setAttribute("download", "invoice.csv");
         tempLink.click();
-
+        // TODO: Delete templink after download
+        // TODO: Store selectors in variables
         // Clear cart after order
         clearCartForCurrentUser();
     }

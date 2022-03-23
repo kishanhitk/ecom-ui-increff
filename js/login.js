@@ -11,7 +11,7 @@ const login = async (e) => {
     if (!user || user.length == 0) {
         $("#error_text").text("Invalid username or password");
     } else {
-        window.localStorage.setItem("user", JSON.stringify(user));
+        window.localStorage.setItem("user", user.email);
         window.location.href = "/index.html";
     }
 
@@ -19,6 +19,7 @@ const login = async (e) => {
 };
 
 const checkLogin = () => {
+    // TODO Check valid user
     if (window.localStorage.getItem("user"))
         window.location.href = "/index.html";
 };
