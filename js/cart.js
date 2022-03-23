@@ -10,7 +10,7 @@ const displayCartItems = async () => {
 
         const cartItemsArray = cartItems;
         // TODO move data fetching to main.js
-        const resp = await fetch("/assets/inventory.json");
+        const resp = await fetch("/assets/db/inventory.json");
         const json = await resp.json();
 
         cartItemsArray.forEach((item) => {
@@ -62,7 +62,7 @@ const displayBillDetails = (cartItems) => {
     billDetailsTable.find("tbody").empty();
     let billTotal = 0;
     const cartItemsArray = cartItems;
-    const resp = fetch("/assets/inventory.json");
+    const resp = fetch("/assets/db/inventory.json");
     resp.then((response) => {
         response.json().then((json) => {
             cartItemsArray?.forEach((item) => {
@@ -163,7 +163,7 @@ const deleteItemFromCart = () => {
 const placeOrder = async () => {
     const cartItems = getUserCart();
     if (cartItems && cartItems.length > 0) {
-        const resp = await fetch("/assets/inventory.json");
+        const resp = await fetch("/assets/db/inventory.json");
         const json = await resp.json();
 
         $("#success_modal").modal("show");

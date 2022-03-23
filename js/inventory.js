@@ -1,5 +1,5 @@
 const getData = async () => {
-    const resp = await fetch("./assets/inventory.json");
+    const resp = await fetch("./assets/db/inventory.json");
     const data = await resp.json();
     return data;
 };

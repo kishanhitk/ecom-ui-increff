@@ -2,7 +2,7 @@ const populateData = async () => {
     // TODO: CHeck alternate method to get id
     // TODO: Use URL class to get id
     const productId = window.location.search.split("=")[1];
-    const resp = await fetch(`/assets/inventory.json`);
+    const resp = await fetch(`/assets/db/inventory.json`);
     const json = await resp.json();
     const product = json.find((element) => element.id == productId);
     // TODO: use !product
