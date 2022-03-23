@@ -2,13 +2,24 @@ const logout = () => {
     window.localStorage.removeItem("user");
     window.location.href = "/html/login.html";
 };
-const checkLoginState = () => {
-    const loginButton = $("#login_button");
-    const logoutButton = $("#logout_button");
+const checkLoginState = async () => {
+    const userFromLocalStoage = getUser();
+    if (userFromLocalStoage) {
+        const resp = await fetch("/assets/users.json");
+        const json = await resp.json();
+        const user = json.find(
+            (element) => element.email == userFromLocalStoage
+        );
+        console.log(user);
+
+        if (!user || user.length == 0) {
+            window.localStorage.removeItem("user");
+            window.location.href = "/html/login.html";
+        } else {
+            $("#username_display").text(user.name);
+        }
+    }
     // TODO Check if user is valid
-    window.localStorage.getItem("user")
-        ? loginButton.hide()
-        : (logoutButton.hide(), (window.location.href = "/html/login.html"));
 };
 function init() {
     checkLoginState();
@@ -55,11 +66,11 @@ const getUser = () => {
         window.location.href = "/html/login.html";
         return;
     }
-    return JSON.parse(user);
+    return user;
 };
 
 const getUserCart = () => {
-    const userId = getUser().email;
+    const userId = getUser();
     // TODO try catch JSON.parse
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     let userCart = cartMap.hasOwnProperty(userId) ? cartMap[userId] : [];
@@ -67,7 +78,7 @@ const getUserCart = () => {
 };
 
 const updateUserCart = (cartItems) => {
-    const userId = getUser().email;
+    const userId = getUser();
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     cartMap[userId] = cartItems;
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
@@ -75,7 +86,7 @@ const updateUserCart = (cartItems) => {
 
 // TODO Can be used on cart page
 const clearCartForCurrentUser = () => {
-    const userId = getUser().email;
+    const userId = getUser();
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     cartMap[userId] = [];
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
