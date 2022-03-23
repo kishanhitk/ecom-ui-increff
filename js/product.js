@@ -14,7 +14,10 @@ const populateData = async () => {
     } else {
         const quantity = getCartQuantity(productId);
         if (quantity > 0) {
+            console.log("quantity", quantity);
             $("#already_in_cart_badge").removeClass("d-none");
+            $("#add_to_cart_btn").text("Update Cart Quantity");
+            $("#quantity").html(quantity);
         }
         document.title = product.name + " | Increff Ecom";
         // TODO: Use .find() instead of accessing DOM everytime
@@ -29,7 +32,7 @@ const populateData = async () => {
 };
 
 const addProductToCart = async () => {
-    const quantity = $("#quantity").val();
+    const quantity = Number($("#quantity").text());
     const productId = window.location.search.split("=")[1];
     await addToCart(productId, quantity);
 };

@@ -6,7 +6,7 @@ const checkLoginState = async () => {
     const userFromLocalStoage = getUser();
     let user;
     if (userFromLocalStoage) {
-        const resp = await fetch("/assets/users.json");
+        const resp = await fetch("/assets/db/users.json");
         const json = await resp.json();
         user = json.find((element) => element.email == userFromLocalStoage);
 
@@ -44,8 +44,7 @@ const addToCart = async (productId, quantity) => {
     );
     if (existingProduct) {
         // If product already exists, increment quantity
-        existingProduct.quantity =
-            parseInt(existingProduct.quantity) + parseInt(quantity);
+        existingProduct.quantity = parseInt(quantity);
     } else {
         // If product does not exist, add product to userCart
         userCart.push({ productId, quantity });

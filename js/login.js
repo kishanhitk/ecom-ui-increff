@@ -3,7 +3,7 @@ const login = async (e) => {
     $("#error_text").text("");
     var username = $("#email_input").val();
     var password = $("#password_input").val();
-    const resp = await fetch("/assets/users.json");
+    const resp = await fetch("/assets/db/users.json");
     const json = await resp.json();
     const user = json.find(
         (element) => element.email == username && element.password == password
