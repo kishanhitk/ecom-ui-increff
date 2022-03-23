@@ -4,13 +4,11 @@ const logout = () => {
 };
 const checkLoginState = async () => {
     const userFromLocalStoage = getUser();
+    let user;
     if (userFromLocalStoage) {
         const resp = await fetch("/assets/users.json");
         const json = await resp.json();
-        const user = json.find(
-            (element) => element.email == userFromLocalStoage
-        );
-        console.log(user);
+        user = json.find((element) => element.email == userFromLocalStoage);
 
         if (!user || user.length == 0) {
             window.localStorage.removeItem("user");
@@ -19,6 +17,7 @@ const checkLoginState = async () => {
             $("#username_display").text(user.name);
         }
     }
+    return user;
     // TODO Check if user is valid
 };
 function init() {
@@ -70,7 +69,8 @@ const getUser = () => {
 };
 
 const getUserCart = () => {
-    const userId = getUser();
+    const userId = checkLoginState();
+    if (!userId) return;
     // TODO try catch JSON.parse
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     let userCart = cartMap.hasOwnProperty(userId) ? cartMap[userId] : [];
@@ -78,7 +78,9 @@ const getUserCart = () => {
 };
 
 const updateUserCart = (cartItems) => {
-    const userId = getUser();
+    const userId = checkLoginState();
+    if (!userId) return;
+
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     cartMap[userId] = cartItems;
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
@@ -86,7 +88,8 @@ const updateUserCart = (cartItems) => {
 
 // TODO Can be used on cart page
 const clearCartForCurrentUser = () => {
-    const userId = getUser();
+    const userId = checkLoginState();
+    if (!userId) return;
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     cartMap[userId] = [];
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
