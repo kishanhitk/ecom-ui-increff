@@ -30,7 +30,7 @@ const displayData = async () => {
             alt=${element.name}>
             ${
                 cartQuantity > 0
-                    ? `<div class="badge badge-success ribbon position-absolute">Already in cart</div>`
+                    ? `<div class="badge badge-success ribbon position-absolute">${cartQuantity} in cart</div>`
                     : ""
             }
         </div>
