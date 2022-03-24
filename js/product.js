@@ -23,7 +23,7 @@ const populateData = async () => {
         // TODO: Use .find() instead of accessing DOM everytime
         $("#product_name").text(product.name);
         $("#product_mrp").text(`Rs. ${product.mrp}`);
-        $("#product_image").attr("src", product.imageUrl);
+        $("#product_image").attr("src", "/assets/images/" + product.imageUrl);
         $("#product_description").text(product.description);
         $("#product_category").append(product.category);
         $("#product_brand").append(product.brandId);

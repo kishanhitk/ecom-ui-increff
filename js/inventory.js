@@ -26,7 +26,7 @@ const displayData = async () => {
             element.id
         }" class=" text-reset text-decoration-none">
         <div class="mx-auto p-4">
-          <img class="img-fluid p-3" src=${element.imageUrl}
+          <img class="img-fluid p-3" src="/assets/images/${element.imageUrl}"
             alt=${element.name}>
             ${
                 cartQuantity > 0
