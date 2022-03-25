@@ -57,117 +57,124 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <!-- Product not found -->
-        <div id="cart_empty" class="d-none">
-            <div class="row justify-content-center align-items-center col-md-12 vh-100 ">
-                <div class="alert" role="alert">
-                    <div class="d-flex flex-column align-items-center">
-                        <h2 class="alert-heading">Your cart is empty!</h2>
-                        <p>Add products to checkout.</p>
-                        <a href="/index.html" class="btn btn-primary my-1">Go to catalog</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog"
-            id="success_modal" style="backdrop-filter: blur(10px);">
-            <div class="modal-dialog text-center" role="document">
-                <div class="modal-content">
-                    <div class="modal-header justify-content-center">
-                        <h3 class="modal-title">Thanks!</h3>
-                    </div>
-                    <div class="modal-body my-4">
-                        <h2>Order Placed Successfully!</h2>
-                        <i class="material-icons text-success my-3" style="display: block;">done</i>
-                        <a href="/index.html" class="btn btn-outline-primary my-1">Keep Shopping</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal modal-fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-            id="delete_item_modal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirmation</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="modal-text">Are you sure you want to remove product from your cart.</p>
-                    </div>
-                    <input type="hidden" name="data-item-id" />
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" id="delete_item_button"
-                            onclick="deleteItemFromCart()">Yes, remove it.</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">No, keep it.</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" id="cart_details">
-            <div class="col-12 mb-5">
-                <h2 class="font-weight-light mt-3">Your Cart</h2>
-                <div class="row justify-content-between">
-                    <div id="cart_items" class="col-lg-7 "></div>
-                    <div class="col-lg-5 ">
-                        <h3>Bill Details</h3>
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="bill_details_table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th scope="row"></th>
-                                        <td></td>
-                                        <td>
-                                            <h5>Total:</h5>
-                                        </td>
-                                        <td>
-                                            <strong>
-                                                Rs. 200
-                                            </strong>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
+        <div class="my-3">
+            <h3>Cart</h3>
+            <hr>
+            <!-- Cart Empty -->
+            <div id="cart_empty" class="d-none">
+                <div class="row justify-content-center align-items-center col-md-12 vh-100 ">
+                    <div class="alert" role="alert">
+                        <div class="d-flex flex-column align-items-center">
+                            <h2 class="alert-heading">Your cart is empty!</h2>
+                            <p>Add products to checkout.</p>
+                            <a href="/index.html" class="btn btn-primary my-1">Go to catalog</a>
                         </div>
-                        <button id="place_order_button" class="float-right btn btn-primary btn-lg">Place Order</button>
                     </div>
                 </div>
+            </div>
 
+            <div class="row" id="cart_details">
+                <div class="col-12 mb-5">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-7">
+                            <h3>Cart Items</h3>
+                            <div id="cart_items"></div>
+                        </div>
+                        <div class="col-lg-5">
+                            <h3>Bill Details</h3>
+                            <div class="table-responsive mt-3">
+                                <table class="table table-striped" id="bill_details_table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td></td>
+                                            <td>
+                                                <h5>Total:</h5>
+                                            </td>
+                                            <td>
+                                                <strong>
+                                                    Rs. 200
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <button id="place_order_button" class="float-right btn btn-primary btn-lg">Place
+                                Order</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog"
+        id="success_modal" style="backdrop-filter: blur(10px);">
+        <div class="modal-dialog text-center" role="document">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h3 class="modal-title">Thanks!</h3>
+                </div>
+                <div class="modal-body my-4">
+                    <h2>Order Placed Successfully!</h2>
+                    <i class="material-icons text-success my-3" style="display: block;">done</i>
+                    <a href="/index.html" class="btn btn-outline-primary my-1">Keep Shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+        id="delete_item_modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modal-text">Are you sure you want to remove product from your cart.</p>
+                </div>
+                <input type="hidden" name="data-item-id" />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="delete_item_button"
+                        onclick="deleteItemFromCart()">Yes, remove it.</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No, keep it.</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <footer class="footer">
         Copyright &#169; Increff 2022 |
