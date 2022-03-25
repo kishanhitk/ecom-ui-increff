@@ -1,7 +1,8 @@
 const populateData = async () => {
     // TODO: CHeck alternate method to get id
     // TODO: Use URL class to get id
-    const productId = window.location.search.split("=")[1];
+    const parsedUrl = new URL(window.location.href);
+    const productId = parsedUrl.searchParams.get("id");
     const resp = await fetch(`/assets/db/inventory.json`);
     const json = await resp.json();
     const product = json.find((element) => element.id == productId);
@@ -14,7 +15,6 @@ const populateData = async () => {
     } else {
         const quantity = getCartQuantity(productId);
         if (quantity > 0) {
-            console.log("quantity", quantity);
             $("#already_in_cart_badge").removeClass("d-none");
             $("#add_to_cart_btn").text("Update Cart Quantity");
             $("#quantity").html(quantity);
@@ -33,7 +33,8 @@ const populateData = async () => {
 
 const addProductToCart = async () => {
     const quantity = Number($("#quantity").text());
-    const productId = window.location.search.split("=")[1];
+    const parsedUrl = new URL(window.location.href);
+    const productId = parsedUrl.searchParams.get("id");
     await addToCart(productId, quantity);
 };
 

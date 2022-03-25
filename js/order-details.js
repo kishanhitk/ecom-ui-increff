@@ -25,7 +25,6 @@ const populateTable = (data) => {
         `;
         $tbody.append(tr);
         billTotal += item.price * item.quantity;
-        console.log(billTotal);
     });
     $table.find("tfoot").empty();
     const billTotalElement = `

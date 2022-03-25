@@ -10,9 +10,8 @@ const displayData = async () => {
     const data = await getData();
     const filtered = applyFilter(data);
     const sorted = applySort(filtered);
-    console.log(sorted.length);
+
     if (sorted.length == 0) {
-        console.log("remove class");
         $("#product_not_found").removeClass("d-none");
     }
     sorted.forEach((element) => {
