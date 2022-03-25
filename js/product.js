@@ -7,7 +7,7 @@ const populateData = async () => {
     const json = await resp.json();
     const product = json.find((element) => element.id == productId);
     // TODO: use !product
-    if (product == undefined) {
+    if (!product) {
         document.title = "Product Not Found | Increff Ecom";
         //  TODO: use d-none  class instead of hide()
         $("#product_detail").hide();
