@@ -28,13 +28,15 @@ const displayCartItems = async () => {
           </div>
             <div class="card-body mt-n5">
                 <div class="row">
-                    <img class="col-auto" src="${product.imageUrl}" />
-                    <div class="col">
-                        <h3 class="card-title">${product.name}</h3>
+                    <img class="col-auto" 
+                    src="/assets/images/${product.imageUrl}"
+                    />
+                    <div class="col-auto">
+                        <h4 class="card-title">${product.name}</h4>
                         <h5 class="text-secondary">By ${product.brandId}</h5>
-                        <h4 class="card-title">Rate: Rs. ${product.mrp}</h4>
+                        <h5 class="card-title"> Rs. ${product.mrp}</h5>
                     </div>
-                    <div class="col input-group col w-auto justify-content-end align-items-center">
+                    <div class="col input-group  justify-content-end align-items-center">
                         <button ${
                             item.quantity <= 1 && "disabled"
                         } class="btn btn-light mx-3"
