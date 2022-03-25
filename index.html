@@ -57,15 +57,15 @@
     </div>
   </nav>
   <div class="container-fluid">
-    <div class="row justify-content-end my-3">
-      <h1 class="mr-auto">Products</h1>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#filter_modal">
+    <div class="row justify-content-end  my-3">
+      <h3 class="mr-auto col-3 ">Products</h3>
+      <button type="button" class="btn btn-primary btn-sm col-auto" data-toggle="modal" data-target="#filter_modal">
         <span class="material-icons">
           filter_alt
         </span>
       </button>
-      <div class="d-flex col-7 col-sm-5 col-md-5 col-lg-2 justify-content-center align-items-baseline">
-        <label for="sort_by" class="col-auto">Sort by:</label>
+      <div class="d-flex col-6 col-sm-5  col-md-5 col-lg-2 justify-content-center align-items-baseline">
+        <label for="sort_by" class="col-auto ">Sort by:</label>
         <!-- TODO all col-auto for label remove max width -->
         <select name="sort_by" class="form-control " id="sort_by">
           <option value="name_a_z">Name: A to Z</option>
@@ -74,6 +74,7 @@
         </select>
       </div>
     </div>
+    <hr>
     <div class="row">
       <div class="col-12">
         <!-- Product not found -->
