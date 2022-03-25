@@ -128,6 +128,8 @@
                                     </tfoot>
                                 </table>
                             </div>
+                            <button class="btn btn-outline-danger" id="clear_cart_btn" data-toggle="modal"
+                                data-target="#clear_cart_modal">Clear cart</button>
                             <button id="place_order_button" class="float-right btn btn-primary btn-lg">Place
                                 Order</button>
                         </div>
@@ -170,6 +172,28 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="delete_item_button"
                         onclick="deleteItemFromCart()">Yes, remove it.</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">No, keep it.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal modal-fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+        id="clear_cart_modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="modal-text">Are you sure you want to clear your cart?</p>
+                </div>
+                <input type="hidden" name="data-item-id" />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" id="delete_item_button"
+                        onclick="clearCartForCurrentUser(); location.reload();">Yes, clear the cart.</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">No, keep it.</button>
                 </div>
             </div>
