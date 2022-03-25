@@ -24,6 +24,9 @@ body {
   text-align: center;
   background-color: #f5f5f5;
 }
+
+.item_card {
+}
 .item_card:hover {
   background-color: #f5f5f5;
   transition: 0.3s ease-in-out all;
@@ -31,4 +34,8 @@ body {
 
 .notifyjs-corner {
   top: 50px !important;
+}
+
+.card_image {
+  max-height: 380px;
 }

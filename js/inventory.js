@@ -18,14 +18,16 @@ const displayData = async () => {
         const cartQuantity = getCartQuantity(element.id);
         // TODO Try using clone method
         const product = $(`
-        <div class="col-12 col-sm-6 col-md-6 col-lg-3 p-4">
-        <div class="item_card shadow rounded-lg text-center position-relative">
-        <div >
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 p-4">
+        <div class="p-1 item_card shadow rounded-lg text-center position-relative">
+        <div>
         <a href="/html/product.html?id=${
             element.id
         }" class=" text-reset text-decoration-none">
-        <div class="mx-auto p-4">
-          <img class="img-fluid p-3" src="/assets/images/${element.imageUrl}"
+        <div class="px-4">
+          <img class="img-fluid p-3 card_image"  src="/assets/images/${
+              element.imageUrl
+          }"
             alt=${element.name}>
             ${
                 cartQuantity > 0
@@ -35,11 +37,12 @@ const displayData = async () => {
         </div>
         </a>
         <div>
-        <h4>${element.name}</h4>
-        <h6>MRP: Rs.${element.mrp}</h6>
-          <button class="btn btn-primary mb-3" onclick='addToCart("${
-              element.id
-          }","${1}");displayData()'>Add to cart</button>
+        <hr>
+        <div class="font-weight-bold">${element.name}</div>
+        <h6>MRP: Rs.${element.mrp}</h6>  
+        <button class="btn btn-primary mb-3" onclick='addToCart("${
+            element.id
+        }","${1}");displayData()'>Add to cart</button>
         </div>
       </div>
         </div>
