@@ -42,7 +42,7 @@ const displayData = async () => {
         <h6>MRP: Rs.${element.mrp}</h6>  
         <button class="btn btn-primary mb-3" onclick='addToCart("${
             element.id
-        }","${1}");displayData()'>Add to cart</button>
+        }","${1}",true);displayData()'>Add to cart</button>
         </div>
       </div>
         </div>

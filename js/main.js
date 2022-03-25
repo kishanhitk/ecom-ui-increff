@@ -35,7 +35,7 @@ const updateCartQuantityHeader = () => {
     $("#cart_count").text(cartCount);
 };
 
-const addToCart = async (productId, quantity) => {
+const addToCart = async (productId, quantity, merge = false) => {
     // Get existing cartMap object if any from localStorage
     let userCart = getUserCart();
     // Find if product already exists in userCart
@@ -44,7 +44,12 @@ const addToCart = async (productId, quantity) => {
     );
     if (existingProduct) {
         // If product already exists, increment quantity
-        existingProduct.quantity = parseInt(quantity);
+        if (merge) {
+            existingProduct.quantity =
+                parseInt(existingProduct.quantity) + parseInt(quantity);
+        } else {
+            existingProduct.quantity = parseInt(quantity);
+        }
     } else {
         // If product does not exist, add product to userCart
         userCart.push({ productId, quantity });
