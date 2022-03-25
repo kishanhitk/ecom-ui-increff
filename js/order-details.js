@@ -6,7 +6,32 @@ function updateFileName() {
 
 const readFileCallback = (result) => {
     const data = result.data;
-    populateTable(data);
+    let isError = false;
+    // Validate Data
+    data.forEach((item) => {
+        const { brand, price, productId, productName, quantity, total } = item;
+        // Check if all fields are valid and price , quantity and total are numbers
+        if (
+            (!brand && brand.length == 0) ||
+            (!price && price.length == 0) ||
+            (!productId && productId.length == 0) ||
+            (!productName && productName.length == 0) ||
+            (!quantity && quantity.length == 0) ||
+            (!total && total.length == 0) ||
+            !Number(price) ||
+            !Number(quantity) ||
+            !Number(total)
+        ) {
+            isError = true;
+            $.notify("Invalid CSV file. Please check the content", {
+                className: "error",
+            });
+        }
+    });
+
+    if (!isError) {
+        populateTable(data);
+    }
 };
 
 const populateTable = (data) => {

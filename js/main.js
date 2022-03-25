@@ -106,6 +106,7 @@ const showLiveDateTime = () => {
     let ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
+    hours = hours < 10 ? "0" + hours : hours;
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
     const strTime = hours + ":" + minutes + ":" + seconds + " " + ampm;
@@ -123,6 +124,9 @@ function readFileData(file, callback) {
     // TODO Add validatiopn
     var config = {
         header: true,
+        error: function (err, file, inputElem, reason) {
+            $.notify(reason, "error");
+        },
         skipEmptyLines: "greedy",
         complete: function (results) {
             callback(results);
