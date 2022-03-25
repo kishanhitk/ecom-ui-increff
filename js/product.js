@@ -10,7 +10,7 @@ const populateData = async () => {
     if (!product) {
         document.title = "Product Not Found | Increff Ecom";
         //  TODO: use d-none  class instead of hide()
-        $("#product_detail").hide();
+        $("#product_detail").addClass("d-none");
         $("#product_not_found").removeClass("d-none");
     } else {
         const quantity = getCartQuantity(productId);

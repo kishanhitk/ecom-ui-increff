@@ -69,8 +69,7 @@ const applyFilter = (data) => {
             filtered.push(product);
         }
     });
-    console.table(selectedColors);
-    console.table(selectedStorages);
+
     return filtered;
 };
 
