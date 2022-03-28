@@ -37,6 +37,7 @@ const addProductToCart = async () => {
     const parsedUrl = new URL(window.location.href);
     const productId = parsedUrl.searchParams.get("id");
     await addToCart(productId, quantity);
+    location.reload();
 };
 
 const incrementQuantity = () => {
