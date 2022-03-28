@@ -87,7 +87,7 @@ const populateFilterCheckBoxes = async () => {
     uniqueStorages.forEach((storage) => {
         const storageFilterGroup = $(`
         <div class="form-check">
-        <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="${storage}"
+        <input class="form-check-input"  type="checkbox" id="inlineCheckbox2" value="${storage}"
           name="storage-input">
         <label class="form-check-label" for="inlineCheckbox2">${storage}</label>
       </div>
@@ -101,7 +101,7 @@ const populateFilterCheckBoxes = async () => {
     uniqueColors.forEach((color) => {
         const colorFilterGroup = $(`
         <div class="form-check ">
-        <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="${color}"
+        <input class="form-check-input"  type="checkbox" id="inlineCheckbox2" value="${color}"
           name="color-input">
         <label class="form-check-label" for="inlineCheckbox2">${color}</label>
       </div>
