@@ -14,6 +14,7 @@ const checkLoginState = async () => {
             window.localStorage.removeItem("user");
             window.location.href = "/html/login.html";
         } else {
+            $("body").removeClass("d-none");
             $("#username_display").text(user.name);
         }
     }
