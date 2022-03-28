@@ -39,7 +39,7 @@ body {
   right: 10px;
 }
 
-.table-responsive {
+.order-details-table-responsive {
   height: 500px;
   overflow: scroll;
 }

@@ -163,7 +163,7 @@ const deleteItemFromCart = async () => {
 };
 
 const placeOrder = async () => {
-    const cartItems = getUserCart();
+    const cartItems = await getUserCart();
     if (cartItems && cartItems.length > 0) {
         const resp = await fetch("/assets/db/inventory.json");
         const json = await resp.json();
@@ -197,10 +197,12 @@ const placeOrder = async () => {
         tempLink.href = fileUrl;
         tempLink.setAttribute("download", "invoice.csv");
         tempLink.click();
+        tempLink.remove();
         // TODO: Delete templink after download
         // TODO: Store selectors in variables
         // Clear cart after order
         clearCartForCurrentUser();
+        
     }
 };
 
