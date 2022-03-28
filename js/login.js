@@ -18,10 +18,21 @@ const login = async (e) => {
     return false;
 };
 
-const checkLogin = () => {
+const checkLogin = async () => {
     // TODO Check valid user
-    if (window.localStorage.getItem("user"))
-        window.location.href = "/index.html";
+    const userFromLocalStoage = window.localStorage.getItem("user");
+    let user;
+    if (userFromLocalStoage) {
+        const resp = await fetch("/assets/db/users.json");
+        const json = await resp.json();
+        user = json.find((element) => element.email == userFromLocalStoage);
+
+        if (!user || user.length == 0) {
+            window.localStorage.removeItem("user");
+        } else {
+            window.location.href = "/index.html";
+        }
+    }
 };
 function init() {
     $("#login_form").submit(login);
