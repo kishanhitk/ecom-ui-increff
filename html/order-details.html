@@ -18,42 +18,53 @@
 
 <body>
 
-    <nav class="navbar navbar-expand navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 
         <a class="navbar-brand" href="/">
 
             <img class="img-fluid logo" src="/assets/images/logo.webp" />
         </a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav">
-                <li class=" nav-item active">
-                    <a class="nav-link" href="/html/order-details.html">
-                        Upload Order
-                    </a>
-                </li>
-            </ul>
-            <ul class=" navbar-nav ml-auto">
+        <a class=" nav-item active nav-link ml-auto d-lg-none d-block" href="/html/cart.html"">
+            <!-- TODO! Add tooltip in icons -->
+            <!-- TODO ID should be hyphen separated -->
+            <i class=" material-icons text-white">shopping_cart</i><span class="badge badge-light bg-danger text-white"
+                id="cart_count""></span>
+          </a>
+        <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="/html/cart.html"">
+                <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class=" nav-item active">
+                            <a class="nav-link" href="/html/order-details.html">
+                                Upload Order
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class=" navbar-nav ml-auto">
+
+                        <li class="nav-item active d-none d-lg-block">
+                            <a class="nav-link" href="/html/cart.html"">
                 <!-- TODO! Add tooltip in icons -->
                 <!-- TODO ID should be hyphen separated -->
                 <i class=" material-icons">shopping_cart</i><span class="badge badge-light bg-danger text-white"
-                            id="cart_count""></span>
+                                    id="cart_count""></span>
               </a>
             </li>
            
             <li class=" nav-item active dropdown mr-4">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span id="username_display">User</span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#" id="logout_button">Logout</a>
-                            </div>
-                </li>
-            </ul>
-        </div>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span id="username_display">User</span>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#" id="logout_button">Logout</a>
+                                    </div>
+                        </li>
+                    </ul>
+                </div>
     </nav>
     <div class="container-fluid my-5">
         <h3 class="mb-3">Order Details</h3>
