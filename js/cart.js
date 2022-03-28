@@ -36,7 +36,7 @@ const displayCartItems = async () => {
                         <h5 class="text-secondary">By ${product.brandId}</h5>
                         <h5 class="card-title"> Rs. ${product.mrp}</h5>
                     </div>
-                    <div class="col input-group  justify-content-end align-items-center">
+                    <div class="col input-group align-self-end  justify-content-end align-items-center">
                         <button ${
                             item.quantity <= 1 && "disabled"
                         } class="btn btn-light mx-3"
@@ -202,7 +202,6 @@ const placeOrder = async () => {
         // TODO: Store selectors in variables
         // Clear cart after order
         clearCartForCurrentUser();
-        
     }
 };
 
