@@ -103,7 +103,7 @@ const clearCartForCurrentUser = async () => {
     const userId = await checkLoginState();
     if (!userId) return;
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
-    cartMap[userId] = [];
+    cartMap[userId.email] = [];
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
 };
 

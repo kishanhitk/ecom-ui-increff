@@ -207,6 +207,10 @@ const placeOrder = async () => {
 function init() {
     displayCartItems();
     displayBillDetails();
+    $("#clear_cart_confirmation_btn").click(() => {
+        clearCartForCurrentUser();
+        location.reload();
+    });
     $("#place_order_button").click(placeOrder);
 }
 

@@ -15,7 +15,8 @@ const populateData = async () => {
     } else {
         const quantity = await getCartQuantity(productId);
         if (quantity > 0) {
-            $("#already_in_cart_badge").removeClass("d-none");
+            // Don't show badge
+            // $("#already_in_cart_badge").removeClass("d-none");
             $("#add_to_cart_btn").text("Update Cart Quantity");
             $("#quantity").html(quantity);
         }
