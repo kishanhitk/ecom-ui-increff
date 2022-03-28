@@ -21,7 +21,7 @@ const displayCartItems = async () => {
             const itemElement = `
             <div class="card my-3">
             <div class="card-header bg-transparent border-bottom-0">
-            <button class="btn close"
+            <button class="btn close" title="Delete Item"
                         onClick='showDeleteItemModal("${product.id}")'>
                         <i class="material-icons">delete</i>
                     </button>

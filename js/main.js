@@ -25,6 +25,9 @@ function init() {
     showLiveDateTime();
     $("#logout_button").on("click", logout);
     updateCartQuantityHeader();
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 }
 
 const updateCartQuantityHeader = () => {
