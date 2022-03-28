@@ -32,7 +32,9 @@ const updateCartQuantityHeader = () => {
         (acc, element) => Number(acc) + Number(element.quantity),
         0
     );
-    $("#cart_count").text(cartCount);
+    $("*#cart_count").each(function () {
+        $(this).text(cartCount);
+    });
 };
 
 const addToCart = async (productId, quantity, merge = false) => {
