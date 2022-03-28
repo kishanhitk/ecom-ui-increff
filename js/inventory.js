@@ -61,6 +61,7 @@ const applyFilter = (data) => {
     $.each($("input[name='color-input']:checked"), function () {
         selectedColors.push($(this).val());
     });
+
     const filtered = [];
     data.forEach((product) => {
         if (
@@ -73,6 +74,44 @@ const applyFilter = (data) => {
         }
     });
 
+    const appliedFilterText = `<div class="">
+    <h5>Showing  ${filtered.length} results for:</h5>
+    <div class="d-flex flex-wrap">
+    ${
+        selectedColors.length > 0
+            ? `<div class="p-2">
+            <h6>Colors:</h6>
+            <div class="d-flex flex-wrap">
+            ${selectedColors
+                .map(
+                    (color) =>
+                        `<div class="p-1 m-1 badge badge-primary">${color}</div>`
+                )
+                .join("")}    
+            </div>
+            </div>`
+            : ""
+    }
+    ${
+        selectedStorages.length > 0
+            ? `<div class="p-2">
+            <h6>Storage:</h6>
+            <div class="d-flex flex-wrap">
+            ${selectedStorages
+                .map(
+                    (storage) =>
+                        `<div class="p-1 m-1 badge badge-primary">${storage}</div>`
+                )
+                .join("")}
+            </div>
+            </div>`
+            : ""
+    }
+    </div>
+    </div>`;
+    if (selectedColors.length > 0 || selectedStorages.length > 0) {
+        $("#applied-filter").html(appliedFilterText);
+    }
     return filtered;
 };
 
