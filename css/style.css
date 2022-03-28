@@ -35,3 +35,6 @@ body {
 .notifyjs-corner {
   top: 50px !important;
 }
+.ribbon {
+  right: 10px;
+}

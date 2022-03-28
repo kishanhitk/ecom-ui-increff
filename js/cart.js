@@ -1,5 +1,5 @@
 const displayCartItems = async () => {
-    let cartItems = getUserCart();
+    let cartItems = await getUserCart();
     const cartItemsList = $("#cart_items");
     cartItemsList.empty();
     if (cartItems) {
@@ -101,8 +101,8 @@ const displayBillDetails = (cartItems) => {
     });
 };
 
-const decrementQuantity = (productId) => {
-    const cartItems = getUserCart();
+const decrementQuantity = async (productId) => {
+    const cartItems = await getUserCart();
     if (cartItems) {
         const cartItemsArray = cartItems;
         const item = cartItemsArray.find(
@@ -121,8 +121,8 @@ const decrementQuantity = (productId) => {
     updateCartQuantityHeader();
 };
 
-const incrementQuantity = (productId) => {
-    const cartItems = getUserCart();
+const incrementQuantity = async (productId) => {
+    const cartItems = await getUserCart();
     if (cartItems) {
         const cartItemsArray = cartItems;
         const item = cartItemsArray.find(
@@ -143,13 +143,13 @@ const showDeleteItemModal = (productId) => {
     $("#delete_item_modal").find("input[name='data-item-id']").val(productId);
 };
 
-const deleteItemFromCart = () => {
+const deleteItemFromCart = async () => {
     const productId = $("#delete_item_modal")
         .find("input[name='data-item-id']")
         .val();
 
     $("#delete_item_modal").modal("show");
-    const cartItems = getUserCart();
+    const cartItems = await getUserCart();
     if (cartItems) {
         const cartItemsArray = cartItems;
         const newCartItems = cartItemsArray.filter(

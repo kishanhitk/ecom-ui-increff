@@ -30,8 +30,9 @@ function init() {
     });
 }
 
-const updateCartQuantityHeader = () => {
-    const cartCount = getUserCart().reduce(
+const updateCartQuantityHeader = async () => {
+    const cartItems = await getUserCart();
+    const cartCount = cartItems.reduce(
         (acc, element) => Number(acc) + Number(element.quantity),
         0
     );
@@ -42,7 +43,7 @@ const updateCartQuantityHeader = () => {
 
 const addToCart = async (productId, quantity, merge = false) => {
     // Get existing cartMap object if any from localStorage
-    let userCart = getUserCart();
+    let userCart = await getUserCart();
     // Find if product already exists in userCart
     const existingProduct = userCart.find(
         (element) => element.productId == productId
@@ -77,27 +78,29 @@ const getUser = () => {
     return user;
 };
 
-const getUserCart = () => {
-    const userId = checkLoginState();
+const getUserCart = async () => {
+    const userId = await checkLoginState();
     if (!userId) return;
+
     // TODO try catch JSON.parse
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
-    let userCart = cartMap.hasOwnProperty(userId) ? cartMap[userId] : [];
+    let userCart = cartMap.hasOwnProperty(userId.email)
+        ? cartMap[userId.email]
+        : [];
     return userCart;
 };
 
-const updateUserCart = (cartItems) => {
-    const userId = checkLoginState();
+const updateUserCart = async (cartItems) => {
+    const userId = await checkLoginState();
     if (!userId) return;
-
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
-    cartMap[userId] = cartItems;
+    cartMap[userId.email] = cartItems;
     localStorage.setItem("cartMap", JSON.stringify(cartMap));
 };
 
 // TODO Can be used on cart page
-const clearCartForCurrentUser = () => {
-    const userId = checkLoginState();
+const clearCartForCurrentUser = async () => {
+    const userId = await checkLoginState();
     if (!userId) return;
     let cartMap = JSON.parse(localStorage.getItem("cartMap")) ?? {};
     cartMap[userId] = [];
@@ -124,8 +127,8 @@ const showLiveDateTime = () => {
     setTimeout(showLiveDateTime, 1000);
 };
 
-const getCartQuantity = (productId) => {
-    const userCart = getUserCart();
+const getCartQuantity = async (productId) => {
+    const userCart = await getUserCart();
     const cartItem = userCart.find((element) => element.productId == productId);
     return cartItem ? cartItem.quantity : 0;
 };

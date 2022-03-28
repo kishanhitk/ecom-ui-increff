@@ -14,8 +14,8 @@ const displayData = async () => {
     if (sorted.length == 0) {
         $("#product_not_found").removeClass("d-none");
     }
-    sorted.forEach((element) => {
-        const cartQuantity = getCartQuantity(element.id);
+    sorted.forEach(async (element) => {
+        const cartQuantity = await getCartQuantity(element.id);
         // TODO Try using clone method
         const product = $(`
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 p-4">
@@ -31,7 +31,7 @@ const displayData = async () => {
             alt=${element.name}>
             ${
                 cartQuantity > 0
-                    ? `<div class="badge badge-success ribbon position-absolute">${cartQuantity} in cart</div>`
+                    ? `<div class="badge badge-success ribbon position-absolute ">${cartQuantity} in cart</div>`
                     : ""
             }
         </div>
