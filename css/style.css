@@ -38,3 +38,14 @@ body {
 .ribbon {
   right: 10px;
 }
+
+.table-responsive {
+  height: 500px;
+  overflow: scroll;
+}
+thead tr:nth-child(1) th {
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
