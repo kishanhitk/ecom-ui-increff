@@ -4,7 +4,8 @@ const displayCartItems = async () => {
     cartItemsList.empty();
     if (cartItems) {
         if (cartItems.length <= 0) {
-            $("#cart_details").hide();
+            $("#cart_details").addClass("d-none");
+            $("#clear_cart_btn").addClass("d-none");
             $("#cart_empty").removeClass("d-none");
         }
 

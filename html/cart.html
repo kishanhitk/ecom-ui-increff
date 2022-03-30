@@ -70,7 +70,11 @@
     </nav>
     <div class="container-fluid">
         <div class="my-3">
-            <h3>Cart</h3>
+            <div class="d-flex justify-content-between">
+                <h3>Cart</h3>
+                <button class="btn text-danger" id="clear_cart_btn" data-toggle="modal"
+                    data-target="#clear_cart_modal">Clear cart</button>
+            </div>
             <hr>
             <!-- Cart Empty -->
             <div id="cart_empty" class="d-none">
@@ -89,11 +93,11 @@
                 <div class="col-12 mb-5">
                     <div class="row justify-content-between">
                         <div class="col-lg-7">
-                            <h3>Cart Items</h3>
+                            <h3></h3>
                             <div id="cart_items"></div>
                         </div>
                         <div class="col-lg-5">
-                            <h3>Bill Details</h3>
+                            <h4>Bill Details</h4>
                             <div class="table-responsive mt-3">
                                 <table class="table table-striped" id="bill_details_table">
                                     <thead>
@@ -140,8 +144,7 @@
                                     </tfoot>
                                 </table>
                             </div>
-                            <button class="btn btn-outline-danger" id="clear_cart_btn" data-toggle="modal"
-                                data-target="#clear_cart_modal">Clear cart</button>
+
                             <button id="place_order_button" class="float-right btn btn-primary btn-lg">Place
                                 Order</button>
                         </div>
