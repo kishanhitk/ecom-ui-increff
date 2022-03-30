@@ -117,6 +117,8 @@ const applyFilter = (data) => {
     </div>`;
     if (selectedColors.length > 0 || selectedStorages.length > 0) {
         $("#applied-filter").html(appliedFilterText);
+    } else {
+        $("#applied-filter").empty();
     }
     return filtered;
 };
