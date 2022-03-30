@@ -16,8 +16,11 @@ const populateData = async () => {
         const quantity = await getCartQuantity(productId);
         if (quantity > 0) {
             // Don't show badge
-            // $("#already_in_cart_badge").removeClass("d-none");
-            $("#add_to_cart_btn").text("Update Cart Quantity");
+            $("#already_in_cart_badge").removeClass("d-none");
+            $("#already_in_cart_badge").text(`${quantity} in cart`);
+            $("#add_to_cart_btn").addClass("d-none");
+            $("#go_to_cart_btn").removeClass("d-none");
+
             $("#quantity").html(quantity);
         }
         document.title = product.name + " | Increff Ecom";
@@ -32,8 +35,7 @@ const populateData = async () => {
     }
 };
 
-const addProductToCart = async () => {
-    const quantity = Number($("#quantity").text());
+const addProductToCart = async (quantity) => {
     const parsedUrl = new URL(window.location.href);
     const productId = parsedUrl.searchParams.get("id");
     await addToCart(productId, quantity);
