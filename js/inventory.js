@@ -55,17 +55,11 @@ const displayData = async () => {
 };
 
 const applyFilter = (data) => {
-    let selectedColors = [];
-    let selectedStorages = [];
-    $.each($("input[name='storage-input']:checked"), function () {
-        selectedStorages.push($(this).val());
-    });
-    $.each($("input[name='color-input']:checked"), function () {
-        selectedColors.push($(this).val());
-    });
+    const filterFromSessionStorage = sessionStorage.getItem("filter");
+    const filter = JSON.parse(filterFromSessionStorage);
 
-    console.log(selectedColors);
-    console.log(selectedStorages);
+    let selectedColors = filter?.colors ?? [];
+    let selectedStorages = filter?.storages ?? [];
 
     const filtered = [];
     data.forEach((product) => {
@@ -127,6 +121,12 @@ const applyFilter = (data) => {
 const populateFilterCheckBoxes = async () => {
     const data = await getData();
 
+    const filterFromSessionStorage = sessionStorage.getItem("filter");
+    const filter = JSON.parse(filterFromSessionStorage);
+
+    const selectedColorsFromStorage = filter?.colors ?? [];
+    const selectedStoragesFromStorage = filter?.storages ?? [];
+
     const storageFilter = $("#storage-input");
 
     const uniqueStorages = [...new Set(data.map((product) => product.storage))];
@@ -135,7 +135,9 @@ const populateFilterCheckBoxes = async () => {
     uniqueStorages.forEach((storage) => {
         const storageFilterGroup = $(`
         <div class="form-check">
-        <input class="form-check-input"  type="checkbox" id="inlineCheckbox2" value="${storage}"
+        <input class="form-check-input" ${
+            selectedStoragesFromStorage.includes(storage) && "checked"
+        } type="checkbox" id="inlineCheckbox2" value="${storage}"
           name="storage-input">
         <label class="form-check-label" for="inlineCheckbox2">${storage}</label>
       </div>
@@ -149,7 +151,9 @@ const populateFilterCheckBoxes = async () => {
     uniqueColors.forEach((color) => {
         const colorFilterGroup = $(`
         <div class="form-check ">
-        <input class="form-check-input"  type="checkbox" id="inlineCheckbox2" value="${color}"
+        <input class="form-check-input" 
+        ${selectedColorsFromStorage.includes(color) && "checked"}
+        type="checkbox" id="inlineCheckbox2" value="${color}"
           name="color-input">
         <label class="form-check-label" for="inlineCheckbox2">${color}</label>
       </div>
@@ -174,13 +178,45 @@ const applySort = (data) => {
     });
     return sorted;
 };
+
+const updateFilterInSessionStorage = () => {
+    let selectedColorsFromInput = [];
+    let selectedStoragesFromInput = [];
+    $.each($("input[name='storage-input']:checked"), function () {
+        selectedStoragesFromInput.push($(this).val());
+    });
+    $.each($("input[name='color-input']:checked"), function () {
+        selectedColorsFromInput.push($(this).val());
+    });
+
+    const newFilter = {
+        colors: selectedColorsFromInput,
+        storages: selectedStoragesFromInput,
+    };
+    sessionStorage.setItem("filter", JSON.stringify(newFilter));
+};
+
+const clearFilters = () => {
+    sessionStorage.removeItem("filter");
+    $("#applied-filter").empty();
+    $("#clear_filter_btn").addClass("d-none");
+    populateFilterCheckBoxes();
+    displayData();
+};
+
 function init() {
     populateFilterCheckBoxes();
     displayData();
     $("#apply-filter-btn").on("click", displayData);
     $("#sort_by").on("change", displayData);
-    $("#storage-input").on("change", displayData);
-    $("#color-input").on("change", displayData);
+    $("#storage-input").on("change", () => {
+        updateFilterInSessionStorage();
+        displayData();
+    });
+    $("#color-input").on("change", () => {
+        updateFilterInSessionStorage();
+        displayData();
+    });
 }
 
 $(document).ready(init);
