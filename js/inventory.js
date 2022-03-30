@@ -79,7 +79,6 @@ const applyFilter = (data) => {
         }
     });
 
-    console.log(filtered);
     const appliedFilterText = `<div class="">
     <h5>Showing  ${filtered.length} results for:</h5>
     <div class="d-flex flex-wrap">
@@ -117,8 +116,10 @@ const applyFilter = (data) => {
     </div>`;
     if (selectedColors.length > 0 || selectedStorages.length > 0) {
         $("#applied-filter").html(appliedFilterText);
+        $("#clear_filter_btn").removeClass("d-none");
     } else {
         $("#applied-filter").empty();
+        $("#clear_filter_btn").addClass("d-none");
     }
     return filtered;
 };

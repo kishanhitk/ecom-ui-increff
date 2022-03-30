@@ -100,7 +100,18 @@
             </div>
           </div>
         </div>
-        <h4 id="applied-filter"></h4>
+        <div class="row justify-content-between align-content-center">
+          <h4 id="applied-filter"></h4>
+          <div>
+
+            <button class="btn btn-outline-danger btn-sm d-none" onclick="populateFilterCheckBoxes();displayData()"
+              title="Clear Filters" id="clear_filter_btn">
+              <span class="material-icons">
+                filter_alt_off
+              </span>
+            </button>
+          </div>
+        </div>
         <div class="row mb-4" id="product_grid"></div>
       </div>
     </div>
@@ -141,8 +152,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="populateFilterCheckBoxes();displayData()">Clear
-              Filters</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal" id="apply-filter-btn">Apply</button>
           </div>
         </div>
