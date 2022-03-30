@@ -106,7 +106,7 @@
     </div>
     <div class="modal modal-fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
       id="filter_modal">
-      <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-dialog " role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Apply Filters</h5>
@@ -141,8 +141,8 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-secondary" onclick="populateFilterCheckBoxes()">Reset</button>
+            <button type="button" class="btn btn-secondary" onclick="populateFilterCheckBoxes();displayData()">Clear
+              Filters</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal" id="apply-filter-btn">Apply</button>
           </div>
         </div>

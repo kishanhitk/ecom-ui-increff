@@ -13,12 +13,14 @@ const displayData = async () => {
 
     if (sorted.length == 0) {
         $("#product_not_found").removeClass("d-none");
+    } else {
+        $("#product_not_found").addClass("d-none");
     }
     sorted.forEach(async (element) => {
         const cartQuantity = await getCartQuantity(element.id);
         // TODO Try using clone method
         const product = $(`
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 p-4">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 p-3">
         <div class="p-1 item_card shadow rounded-lg text-center position-relative">
         <div>
         <a href="/html/product.html?id=${
@@ -62,6 +64,9 @@ const applyFilter = (data) => {
         selectedColors.push($(this).val());
     });
 
+    console.log(selectedColors);
+    console.log(selectedStorages);
+
     const filtered = [];
     data.forEach((product) => {
         if (
@@ -74,6 +79,7 @@ const applyFilter = (data) => {
         }
     });
 
+    console.log(filtered);
     const appliedFilterText = `<div class="">
     <h5>Showing  ${filtered.length} results for:</h5>
     <div class="d-flex flex-wrap">
@@ -170,6 +176,8 @@ function init() {
     displayData();
     $("#apply-filter-btn").on("click", displayData);
     $("#sort_by").on("change", displayData);
+    $("#storage-input").on("change", displayData);
+    $("#color-input").on("change", displayData);
 }
 
 $(document).ready(init);
