@@ -70,7 +70,7 @@
   <div class="container-fluid">
     <div class="row justify-content-end  my-3">
       <h3 class="mr-auto col-3 ">Products</h3>
-      <button type="button" class="btn btn-primary btn-sm col-auto" data-toggle="modal" data-target="#filter_modal"
+      <button type="button" class="btn btn-primary btn-sm col-auto d-block d-lg-none" data-toggle="modal" data-target="#filter_modal"
         title="Filter">
         <span class="material-icons">
           filter_alt
@@ -100,19 +100,49 @@
             </div>
           </div>
         </div>
-        <div class="row justify-content-between align-content-center">
-          <h4 id="applied-filter"></h4>
-          <div>
+        <div class="row">
+          <div class="col-2 shadow-sm bg-light d-none d-lg-block">
+            <form id="aside_filter_form">
+              <label for="storage-input">Internal Storage:</label>
+              <fieldset id="storage-input-aside">
+                <!-- TODO remove dummy filter if not using clone -->
+                <div class="form-check ">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="64GB" name="storage-input"
+                    checked>
+                  <label class="form-check-label" for="inlineCheckbox1">64GB</label>
+                </div>
+              </fieldset>
+              <label for="color-input" class="mt-3">Color:</label>
+              <fieldset id="color-input-aside">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Green" name="color-input"
+                    checked>
+                  <label class="form-check-label" for="inlineCheckbox1">Greeen</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" checked type="checkbox" id="inlineCheckbox2" value="Red"
+                    name="color-input">
+                  <label class="form-check-label" for="inlineCheckbox2">Red</label>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="col-12 col-lg-10">
+            <div class="row justify-content-between align-content-center">
+              <h4 id="applied-filter"></h4>
+              <div>
 
-            <button class="btn btn-outline-danger btn-sm d-none" onclick="clearFilters()" title="Clear Filters"
-              id="clear_filter_btn">
-              <span class="material-icons">
-                filter_alt_off
-              </span>
-            </button>
+                <button class="btn btn-outline-danger btn-sm d-none" onclick="clearFilters()" title="Clear Filters"
+                  id="clear_filter_btn">
+                  <span class="material-icons">
+                    filter_alt_off
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div class="row mb-4" id="product_grid"></div>
           </div>
         </div>
-        <div class="row mb-4" id="product_grid"></div>
       </div>
     </div>
     <div class="modal modal-fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"

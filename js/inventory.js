@@ -128,10 +128,12 @@ const populateFilterCheckBoxes = async () => {
     const selectedStoragesFromStorage = filter?.storages ?? [];
 
     const storageFilter = $("#storage-input");
+    const storageFilterAside = $("#storage-input-aside");
 
     const uniqueStorages = [...new Set(data.map((product) => product.storage))];
 
     storageFilter.empty();
+    storageFilterAside.empty();
     uniqueStorages.forEach((storage) => {
         const storageFilterGroup = $(`
         <div class="form-check">
@@ -143,11 +145,14 @@ const populateFilterCheckBoxes = async () => {
       </div>
         `);
         storageFilter.append(storageFilterGroup);
+        storageFilterAside.append(storageFilterGroup.clone());
     });
 
     const colorFilter = $("#color-input");
+    const colorFilterAside = $("#color-input-aside");
     const uniqueColors = [...new Set(data.map((product) => product.color))];
     colorFilter.empty();
+    colorFilterAside.empty();
     uniqueColors.forEach((color) => {
         const colorFilterGroup = $(`
         <div class="form-check ">
@@ -159,6 +164,7 @@ const populateFilterCheckBoxes = async () => {
       </div>
         `);
         colorFilter.append(colorFilterGroup);
+        colorFilterAside.append(colorFilterGroup.clone());
     });
 };
 
@@ -179,7 +185,8 @@ const applySort = (data) => {
     return sorted;
 };
 
-const updateFilterInSessionStorage = () => {
+function updateFilterInSessionStorage() {
+    console.log(this);
     let selectedColorsFromInput = [];
     let selectedStoragesFromInput = [];
     $.each($("input[name='storage-input']:checked"), function () {
@@ -189,12 +196,17 @@ const updateFilterInSessionStorage = () => {
         selectedColorsFromInput.push($(this).val());
     });
 
+    console.log(selectedStoragesFromInput);
+    const uniqueSelectedStoragesFromInput = [
+        ...new Set(selectedStoragesFromInput),
+    ];
+    const uniqueSelectedColorsFromInput = [...new Set(selectedColorsFromInput)];
     const newFilter = {
-        colors: selectedColorsFromInput,
-        storages: selectedStoragesFromInput,
+        colors: uniqueSelectedColorsFromInput,
+        storages: uniqueSelectedStoragesFromInput,
     };
     sessionStorage.setItem("filter", JSON.stringify(newFilter));
-};
+}
 
 const clearFilters = () => {
     sessionStorage.removeItem("filter");
@@ -204,19 +216,21 @@ const clearFilters = () => {
     displayData();
 };
 
+function handleFilterChange() {
+    updateFilterInSessionStorage();
+    populateFilterCheckBoxes();
+    displayData();
+}
+
 function init() {
     populateFilterCheckBoxes();
     displayData();
     $("#apply-filter-btn").on("click", displayData);
     $("#sort_by").on("change", displayData);
-    $("#storage-input").on("change", () => {
-        updateFilterInSessionStorage();
-        displayData();
-    });
-    $("#color-input").on("change", () => {
-        updateFilterInSessionStorage();
-        displayData();
-    });
+    $("#storage-input").on("change", handleFilterChange);
+    $("#color-input").on("change", handleFilterChange);
+    $("#storage-input-aside").on("change", handleFilterChange);
+    $("#color-input-aside").on("change", handleFilterChange);
 }
 
 $(document).ready(init);
