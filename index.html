@@ -44,8 +44,7 @@
           </a>
         </li>
       </ul>
-      <ul class=" navbar-nav ml-auto">
-
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item active d-none d-lg-block">
           <a class="nav-link" href="/html/cart.html" title="Cart">
             <!-- TODO! Add tooltip in icons -->
@@ -70,8 +69,8 @@
   <div class="container-fluid">
     <div class="row justify-content-end  my-3">
       <h3 class="mr-auto col-3 ">Products</h3>
-      <button type="button" class="btn btn-primary btn-sm col-auto" data-toggle="modal" data-target="#filter_modal"
-        title="Filter">
+      <button type="button" class="btn btn-primary btn-sm col-auto d-block d-lg-none" data-toggle="modal"
+        data-target="#filter_modal" title="Filter">
         <span class="material-icons">
           filter_alt
         </span>
@@ -89,22 +88,36 @@
     <hr>
     <div class="row">
       <div class="col-12">
-        <!-- Product not found -->
-        <div id="product_not_found" class="d-none">
-          <div class="row justify-content-center align-items-center col-md-12 vh-100">
-            <div class="alert" role="alert">
-              <div class="d-flex flex-column align-items-center">
-                <h2 class="alert-heading">Oops! No product found with selected combination</h2>
-                <a href="/index.html" class="btn btn-primary my-1">Reload the page.</a>
+        <div class="row">
+          <aside class="col-2 bg-light d-none d-lg-block" id="filter_aside">
+            <form>
+              <label for="storage-input">Internal Storage:</label>
+              <fieldset id="storage-input">
+              </fieldset>
+              <label for="color-input" class="mt-3">Color:</label>
+              <fieldset id="color-input">
+              </fieldset>
+            </form>
+          </aside>
+          <div class="col-12 col-lg-10">
+            <!-- Product not found -->
+            <div id="product_not_found" class="d-none">
+              <div class="row justify-content-center align-items-center col-md-12 vh-100">
+                <div class="alert" role="alert">
+                  <div class="d-flex flex-column align-items-center">
+                    <h2 class="alert-heading">Oops! No product found with selected combination</h2>
+                    <a href="/index.html" class="btn btn-primary my-1">Reload the page.</a>
+                  </div>
+                </div>
               </div>
             </div>
+            <h4 id="applied-filter"></h4>
+            <div class="row mb-4" id="product_grid"></div>
           </div>
         </div>
-        <h4 id="applied-filter"></h4>
-        <div class="row mb-4" id="product_grid"></div>
       </div>
     </div>
-    <div class="modal modal-fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+    <!-- <div class="modal modal-fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
       id="filter_modal">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
@@ -118,7 +131,6 @@
             <form>
               <label for="storage-input">Internal Storage:</label>
               <fieldset id="storage-input">
-                <!-- TODO remove dummy filter if not using clone -->
                 <div class="form-check ">
                   <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="64GB" name="storage-input"
                     checked>
@@ -148,6 +160,7 @@
         </div>
       </div>
     </div>
+     -->
   </div>
 
   </div>

@@ -1,3 +1,6 @@
+const selectedColors = [];
+const selectedStorages = [];
+
 const getData = async () => {
     const resp = await fetch("./assets/db/inventory.json");
     const data = await resp.json();
@@ -165,11 +168,20 @@ const applySort = (data) => {
     });
     return sorted;
 };
+
+const updateSelectedStorages = () => {
+    $.each($("input[name='storage-input']:checked"), function () {
+        selectedStorages.push($(this).val());
+    });
+    console.log(selectedStorages);
+};
 function init() {
     populateFilterCheckBoxes();
     displayData();
     $("#apply-filter-btn").on("click", displayData);
     $("#sort_by").on("change", displayData);
+    $("#storage-input").on("change", displayData);
+    $("#color-input").on("change", displayData);
 }
 
 $(document).ready(init);
