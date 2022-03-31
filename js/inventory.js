@@ -186,9 +186,25 @@ const applySort = (data) => {
 };
 
 function updateFilterInSessionStorage() {
-    console.log(this);
     let selectedColorsFromInput = [];
     let selectedStoragesFromInput = [];
+    const storageFilter = $("#storage-input");
+    const storageFilterAside = $("#storage-input-aside");
+    const colorFilter = $("#color-input");
+    const colorFilterAside = $("#color-input-aside");
+    if (this.id == "storage-input-aside") {
+        storageFilter.empty();
+    }
+    if (this.id == "color-input-aside") {
+        colorFilter.empty();
+    }
+    if (this.id == "storage-input") {
+        storageFilterAside.empty();
+    }
+    if (this.id == "color-input") {
+        colorFilterAside.empty();
+    }
+
     $.each($("input[name='storage-input']:checked"), function () {
         selectedStoragesFromInput.push($(this).val());
     });
@@ -217,7 +233,7 @@ const clearFilters = () => {
 };
 
 function handleFilterChange() {
-    updateFilterInSessionStorage();
+    updateFilterInSessionStorage.call(this);
     populateFilterCheckBoxes();
     displayData();
 }
@@ -229,7 +245,7 @@ function init() {
     $("#sort_by").on("change", displayData);
     $("#storage-input").on("change", handleFilterChange);
     $("#color-input").on("change", handleFilterChange);
-    $("#storage-input-aside").on("change", handleFilterChange);
+    $("#storage-input-aside").change(handleFilterChange);
     $("#color-input-aside").on("change", handleFilterChange);
 }
 

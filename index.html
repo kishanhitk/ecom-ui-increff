@@ -70,8 +70,8 @@
   <div class="container-fluid">
     <div class="row justify-content-end  my-3">
       <h3 class="mr-auto col-3 ">Products</h3>
-      <button type="button" class="btn btn-primary btn-sm col-auto d-block d-lg-none" data-toggle="modal" data-target="#filter_modal"
-        title="Filter">
+      <button type="button" class="btn btn-primary btn-sm col-auto d-block d-lg-none" data-toggle="modal"
+        data-target="#filter_modal" title="Filter">
         <span class="material-icons">
           filter_alt
         </span>
@@ -95,7 +95,8 @@
             <div class="alert" role="alert">
               <div class="d-flex flex-column align-items-center">
                 <h2 class="alert-heading">Oops! No product found with selected combination</h2>
-                <a href="/index.html" class="btn btn-primary my-1">Reload the page.</a>
+                <button class="btn btn-primary my-1" onclick="clearFilters()">Reset all filters.
+                </button>
               </div>
             </div>
           </div>
