@@ -8,6 +8,14 @@ const readFileCallback = (result) => {
     const data = result.data;
     let isError = false;
     // Validate Data
+    if (data.length === 0) {
+        isError = true;
+        $("#error_alert").text(
+            "No data found in the CSV file. Please check the file and try again."
+        );
+        $("#error_alert").removeClass("d-none");
+        $("#table_container").addClass("d-none");
+    }
     data.forEach((item) => {
         const { brand, price, productId, productName, quantity, total } = item;
         // Check if all fields are valid and price , quantity and total are numbers
@@ -23,13 +31,15 @@ const readFileCallback = (result) => {
             !Number(total)
         ) {
             isError = true;
-            $.notify("Invalid CSV file. Please check the content", {
-                className: "error",
-            });
+            $("#error_alert").html(
+                "Error reading CSV file. Please check the file and try again."
+            );
+            $("#error_alert").removeClass("d-none");
+            $("#table_container").addClass("d-none");
         }
     });
-
     if (!isError) {
+        $("#error_alert").addClass("d-none");
         populateTable(data);
     }
 };
