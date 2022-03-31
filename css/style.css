@@ -43,6 +43,9 @@ body {
   height: 500px;
   overflow: scroll;
 }
+.order-details-table-responsive::-webkit-scrollbar {
+  display: none;
+}
 thead tr:nth-child(1) th {
   background: white;
   position: sticky;

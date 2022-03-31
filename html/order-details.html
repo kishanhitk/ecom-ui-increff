@@ -69,7 +69,9 @@
     <div class="container-fluid my-5">
         <h3 class="mb-3">Order Details</h3>
         <hr>
-        <div class="input-group ml-n3 mb-3 col-12  col-sm-12 col-md-6 col-lg-4">
+        <h4>Upload your invoice CSV to see order details. <span><a href="/assets/sample/sample_invoice.csv">(Download
+                    Sample CSV)</a></span></h4>
+        <div class="input-group ml-n3 mt-3 col-12  col-sm-12 col-md-6 col-lg-4">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
             </div>
@@ -80,10 +82,9 @@
                 <label class="custom-file-label" id="csv_fileName" for="csv_file">Choose file</label>
             </div>
         </div>
-        <h4>Upload your invoice CSV to see order details. <span><a href="/assets/sample/sample_invoice.csv">(Download
-                    Sample CSV)</a></span></h4>
+
         <div>
-            <div class="table-responsive order-details-table-responsive d-none" id="table_container">
+            <div class="table-responsive order-details-table-responsive d-none my-3" id="table_container">
                 <table class="table" id="order_details_table">
                     <thead class="thead-dark">
                         <tr>
