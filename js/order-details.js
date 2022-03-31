@@ -66,7 +66,7 @@ const populateTable = (data) => {
         </tr>
         `;
     $table.find("tfoot").append(billTotalElement);
-    $table.show();
+    $("#table_container").removeClass("d-none");
 };
 
 const displayTableFromCSV = () => {
@@ -76,7 +76,6 @@ const displayTableFromCSV = () => {
 };
 
 function init() {
-    $("#order_details_table").hide();
     $("#csv_file").on("change", () => {
         updateFileName();
         displayTableFromCSV();

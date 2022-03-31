@@ -20,7 +20,6 @@ const populateData = async () => {
             $("#already_in_cart_badge").text(`${quantity} in cart`);
             $("#add_to_cart_btn").addClass("d-none");
             $("#go_to_cart_btn").removeClass("d-none");
-
             $("#quantity").html(quantity);
         }
         document.title = product.name + " | Increff Ecom";
