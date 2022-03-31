@@ -18,6 +18,12 @@ const displayCartItems = async () => {
             const product = json.find(
                 (element) => element.id === item.productId
             );
+            if (!product || item.quantity < 1) {
+                $.notify("Something went wrong.", "error");
+                clearCartForCurrentUser();
+                location.reload();
+                return;
+            }
             // TODO: try to use clone()
             const itemElement = `
             <div class="card my-3">
@@ -72,6 +78,9 @@ const displayBillDetails = (cartItems) => {
                 const product = json.find(
                     (element) => element.id === item.productId
                 );
+                if (!product) {
+                    return;
+                }
                 const itemElement = `
                     <tr>
                         <td>${product.name}</td>
