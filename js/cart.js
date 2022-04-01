@@ -35,13 +35,18 @@ const displayCartItems = async () => {
           </div>
             <div class="card-body mt-n5">
                 <div class="row">
-                    <img class="col-auto" 
+                    <img class="col-auto " 
                     src="/assets/images/${product.imageUrl}"
                     />
                     <div class="col-auto">
                         <h4 class="card-title">${product.name}</h4>
-                        <h5 class="text-secondary">By ${product.brandId}</h5>
-                        <h5 class="card-title"> Rs. ${product.mrp}</h5>
+                        <h6 class="text-secondary">By ${product.brandId}</h6>
+                        <h6 > Rs. ${
+                            product.mrp
+                        } <span class="text-secondary">X </span><span>${
+                item.quantity
+            }</span></h6>
+            <h5 class="font-weight-bold my-3">Rs. ${item.quantity * product.mrp}</h5>
                     </div>
                     <div class="col input-group align-self-end  justify-content-end align-items-center">
                         <button ${
@@ -92,6 +97,8 @@ const displayBillDetails = (cartItems) => {
                 billDetailsTable.find("tbody").append(itemElement);
                 billTotal += product.mrp * item.quantity;
             });
+            $("#total_amount").html(`Rs. ${billTotal}`);
+            $("#price").html(`Rs. ${billTotal}`);
             billDetailsTable.find("tfoot").empty();
             const billTotalElement = `
                 <tr>

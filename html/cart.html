@@ -96,57 +96,28 @@
                             <h3></h3>
                             <div id="cart_items"></div>
                         </div>
-                        <div class="col-lg-5">
-                            <h4>Bill Details</h4>
-                            <div class="table-responsive mt-3">
-                                <table class="table table-striped" id="bill_details_table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td>
-                                                <h5>Total:</h5>
-                                            </td>
-                                            <td>
-                                                <strong>
-                                                    Rs. 200
-                                                </strong>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                        <div class="col-lg-5 bg-light p-3 ">
+                            <h3>Bill Details</h3>
+                            <hr>
+                            <div class="px-3 py-2 row justify-content-between">
+                                <h5>Price:</h6>
+                                    <strong id="price">Rs. 190</strong>
+                            </div>
+                            <div class="px-3 py-2 row justify-content-between">
+                                <h5>Discount:</h6>
+                                    <strong class="text-success">- Rs. 0</strong>
+                            </div>
+                            <div class="px-3 py-2 row justify-content-between">
+                                <h5>Delivery Charges:</h6>
+                                    <strong class="text-success">FREE</strong>
                             </div>
 
-                            <button id="place_order_button" class="float-right btn btn-primary btn-lg">Place
-                                Order</button>
+                            <hr>
+                            <div class="px-3 py-2 row justify-content-between">
+                                <h4>Total Amount:</h6>
+                                    <strong id="total_amount">Rs. 190</strong>
+                            </div>
+                            <div class="btn btn-primary btn-lg float-right">Place Order</div>
                         </div>
                     </div>
 
