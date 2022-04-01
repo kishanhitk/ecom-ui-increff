@@ -25,8 +25,6 @@ body {
   background-color: #f5f5f5;
 }
 
-.item_card {
-}
 .item_card:hover {
   background-color: #f5f5f5;
   transition: 0.3s ease-in-out all;
@@ -42,11 +40,14 @@ body {
 .order-details-table-responsive {
   height: 500px;
   overflow: scroll;
+  /* Use overflow  auto */
+  /* Curse2: Never use overflow scroll  */
 }
 .order-details-table-responsive::-webkit-scrollbar {
   display: none;
 }
 thead tr:nth-child(1) th {
+  /* Don't use nth ch */
   background: white;
   position: sticky;
   top: 0;
@@ -57,4 +58,5 @@ thead tr:nth-child(1) th {
   width: 100%;
   height: 300px;
   object-fit: contain;
+  /* Read alternative for objective-fit contain */
 }
