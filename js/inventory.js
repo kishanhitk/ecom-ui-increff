@@ -20,7 +20,9 @@ const displayData = async () => {
         const cartQuantity = await getCartQuantity(element.id);
         // TODO Try using clone method
         const product = $(`
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 p-3">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 p-3" id="card_${
+            element.id
+        }">
         <div class="p-1 item_card shadow rounded-lg text-center position-relative">
         <div>
         <a href="/html/product.html?id=${
@@ -34,7 +36,7 @@ const displayData = async () => {
             ${
                 cartQuantity > 0
                     ? `<div class="badge badge-success ribbon position-absolute ">${cartQuantity} in cart</div>`
-                    : ""
+                    : '<div class="badge badge-success ribbon position-absolute d-none"></div>'
             }
         </div>
         </a>
@@ -42,9 +44,9 @@ const displayData = async () => {
         <hr>
         <div class="font-weight-bold">${element.name}</div>
         <h6>MRP: Rs.${element.mrp}</h6>  
-        <button class="btn btn-primary mb-3" onclick='addToCart("${
+        <button class="btn btn-primary mb-3" onclick='addProductToCart("${
             element.id
-        }","${1}",true);displayData()'>Add to cart</button>
+        }")'>Add to cart</button>
         </div>
       </div>
         </div>
@@ -54,6 +56,15 @@ const displayData = async () => {
     });
 };
 
+const addProductToCart = async (productId) => {
+    await addToCart(productId, 1, true);
+    const quantiy = await getCartQuantity(productId);
+    console.log(quantiy, productId);
+    $("#card_" + productId)
+        .find(".badge")
+        .removeClass("d-none")
+        .html(`${quantiy} in cart`);
+};
 const applyFilter = (data) => {
     const filterFromSessionStorage = sessionStorage.getItem("filter");
     const filter = JSON.parse(filterFromSessionStorage);
