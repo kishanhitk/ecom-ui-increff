@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Increff Ecom</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <link rel="icon" href="https://storage.googleapis.com/www.increff.com/img/favicon.png?v=2" type="image/x-icon" />
+    <link rel="stylesheet"
+        href="https://storage.googleapis.com/static.increff.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body class="d-none">
+
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-primary">
+
+        <a class="navbar-brand" href="/">
+
+            <img class="img-fluid logo" src="/assets/images/logo.webp" />
+        </a>
+        <a class=" nav-item active nav-link ml-auto d-lg-none d-block" href="/html/cart.html">
+            <!-- TODO! Add tooltip in icons -->
+            <!-- TODO ID should be hyphen separated -->
+            <i class=" material-icons text-white">shopping_cart</i><span class="badge badge-light bg-danger text-white"
+                id="cart_count"></span>
+        </a>
+        <button class=" navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class=" collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class=" nav-item active">
+                    <a class="nav-link" href="/html/order-details.html">
+                        Upload Order
+                    </a>
+                </li>
+            </ul>
+            <ul class=" navbar-nav ml-auto">
+
+                <li class="nav-item active d-none d-lg-block">
+                    <a class="nav-link" href="/html/cart.html" title="Cart">
+                        <!-- TODO! Add tooltip in icons -->
+                        <!-- TODO ID should be hyphen separated -->
+                        <i class=" material-icons">shopping_cart</i><span class="badge badge-light bg-danger text-white"
+                            id="cart_count"></span>
+                    </a>
+                </li>
+
+                <li class=" nav-item active dropdown mr-4">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span id="username_display">User</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" id="logout_button">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid my-5">
+        <h3 class="mb-3">Order Details</h3>
+        <hr>
+        <h4>Upload your invoice CSV to see order details. <span><a href="/assets/sample/sample_invoice.csv">(Download
+                    Sample CSV)</a></span></h4>
+        <div class="input-group ml-n3 mt-3 col-12  col-sm-12 col-md-6 col-lg-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+            </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="csv_file"
+                    accept="text/csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    aria-describedby="inputGroupFileAddon01">
+                <label class="custom-file-label" id="csv_fileName" for="csv_file">Choose file</label>
+            </div>
+        </div>
+        <div class="alert alert-danger my-4 d-none" id="error_alert" role="alert">
+            Error reading CSV file. Please check the content.
+        </div>
+
+        <div>
+            <div class="table-responsive order-details-table-responsive d-none my-3" id="table_container">
+                <table class="table" id="order_details_table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                            <td>
+                                <h5>Total:</h5>
+                            </td>
+                            <td>
+                                <strong>
+                                    Rs. 200
+                                </strong>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer class="footer">
+        Copyright &#169; Increff 2022 |
+        <span id="date_time"></span>
+        &nbsp;
+    </footer>
+    <script src="https://storage.googleapis.com/static.increff.com/jquery/3.3.1/jquery-3.3.1.min.js"></script>
+    <script src="https://storage.googleapis.com/static.increff.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/order-details.js"></script>
+    <script src="/js/papaparse.js"></script>
+    <script src="/js/notify.js"></script>
+
+</body>
+
+</html>

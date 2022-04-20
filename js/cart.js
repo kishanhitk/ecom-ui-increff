@@ -1,38 +1,54 @@
 const displayCartItems = async () => {
-    let cartItems = getUserCart();
+    let cartItems = await getUserCart();
     const cartItemsList = $("#cart_items");
     cartItemsList.empty();
     if (cartItems) {
         if (cartItems.length <= 0) {
-            $("#cart_details").hide();
+            $("#cart_details").addClass("d-none");
+            $("#clear_cart_btn").addClass("d-none");
             $("#cart_empty").removeClass("d-none");
         }
 
         const cartItemsArray = cartItems;
-        const resp = await fetch("/assets/inventory.json");
+        // TODO move data fetching to main.js
+        const resp = await fetch("/assets/db/inventory.json");
         const json = await resp.json();
 
         cartItemsArray.forEach((item) => {
             const product = json.find(
                 (element) => element.id === item.productId
             );
+            if (!product || item.quantity < 1) {
+                $.notify("Something went wrong.", "error");
+                clearCartForCurrentUser();
+                location.reload();
+                return;
+            }
+            // TODO: try to use clone()
             const itemElement = `
             <div class="card my-3">
             <div class="card-header bg-transparent border-bottom-0">
-            <button class="btn close"
+            <button class="btn close" title="Delete Item"
                         onClick='showDeleteItemModal("${product.id}")'>
                         <i class="material-icons">delete</i>
                     </button>
           </div>
             <div class="card-body mt-n5">
                 <div class="row">
-                    <img class="col-auto" src="${product.imageUrl}" />
-                    <div class="col">
-                        <h3 class="card-title">${product.name}</h3>
-                        <h5 class="text-secondary">By ${product.brandId}</h5>
-                        <h4 class="card-title">Rate: Rs. ${product.mrp}</h4>
+                    <img class="col-auto " 
+                    src="/assets/images/${product.imageUrl}"
+                    />
+                    <div class="col-auto">
+                        <h4 class="card-title">${product.name}</h4>
+                        <h6 class="text-secondary">By ${product.brandId}</h6>
+                        <h6 > Rs. ${
+                            product.mrp
+                        } <span class="text-secondary">X </span><span>${
+                item.quantity
+            }</span></h6>
+            <h5 class="font-weight-bold my-3">Rs. ${item.quantity * product.mrp}</h5>
                     </div>
-                    <div class="col input-group col w-auto justify-content-end align-items-center">
+                    <div class="col input-group align-self-end  justify-content-end align-items-center">
                         <button ${
                             item.quantity <= 1 && "disabled"
                         } class="btn btn-light mx-3"
@@ -60,13 +76,16 @@ const displayBillDetails = (cartItems) => {
     billDetailsTable.find("tbody").empty();
     let billTotal = 0;
     const cartItemsArray = cartItems;
-    const resp = fetch("/assets/inventory.json");
+    const resp = fetch("/assets/db/inventory.json");
     resp.then((response) => {
         response.json().then((json) => {
-            cartItemsArray.forEach((item) => {
+            cartItemsArray?.forEach((item) => {
                 const product = json.find(
                     (element) => element.id === item.productId
                 );
+                if (!product) {
+                    return;
+                }
                 const itemElement = `
                     <tr>
                         <td>${product.name}</td>
@@ -78,6 +97,8 @@ const displayBillDetails = (cartItems) => {
                 billDetailsTable.find("tbody").append(itemElement);
                 billTotal += product.mrp * item.quantity;
             });
+            $("#total_amount").html(`Rs. ${billTotal}`);
+            $("#price").html(`Rs. ${billTotal}`);
             billDetailsTable.find("tfoot").empty();
             const billTotalElement = `
                 <tr>
@@ -97,8 +118,8 @@ const displayBillDetails = (cartItems) => {
     });
 };
 
-const decrementQuantity = (productId) => {
-    const cartItems = getUserCart();
+const decrementQuantity = async (productId) => {
+    const cartItems = await getUserCart();
     if (cartItems) {
         const cartItemsArray = cartItems;
         const item = cartItemsArray.find(
@@ -117,8 +138,8 @@ const decrementQuantity = (productId) => {
     updateCartQuantityHeader();
 };
 
-const incrementQuantity = (productId) => {
-    const cartItems = getUserCart();
+const incrementQuantity = async (productId) => {
+    const cartItems = await getUserCart();
     if (cartItems) {
         const cartItemsArray = cartItems;
         const item = cartItemsArray.find(
@@ -135,17 +156,17 @@ const incrementQuantity = (productId) => {
 
 const showDeleteItemModal = (productId) => {
     $("#delete_item_modal").modal("show");
+    // TODO: Use data method to set the value of the hidden input
     $("#delete_item_modal").find("input[name='data-item-id']").val(productId);
 };
 
-const deleteItemFromCart = () => {
-    console.log("delete item from cart");
+const deleteItemFromCart = async () => {
     const productId = $("#delete_item_modal")
         .find("input[name='data-item-id']")
         .val();
-    console.log(productId);
+
     $("#delete_item_modal").modal("show");
-    const cartItems = getUserCart();
+    const cartItems = await getUserCart();
     if (cartItems) {
         const cartItemsArray = cartItems;
         const newCartItems = cartItemsArray.filter(
@@ -159,10 +180,12 @@ const deleteItemFromCart = () => {
 };
 
 const placeOrder = async () => {
-    const cartItems = getUserCart();
+    const cartItems = await getUserCart();
     if (cartItems && cartItems.length > 0) {
-        const resp = await fetch("/assets/inventory.json");
+        const resp = await fetch("/assets/db/inventory.json");
         const json = await resp.json();
+
+        $("#success_modal").modal("show");
         // Convert cart items to CSV
         let csv = Papa.unparse(
             cartItems.map((item) => {
@@ -170,8 +193,8 @@ const placeOrder = async () => {
                     (element) => element.id === item.productId
                 );
                 return {
-                    product: product.name,
                     productId: product.id,
+                    productName: product.name,
                     brand: product.brandId,
                     price: product.mrp,
                     quantity: item.quantity,
@@ -191,12 +214,21 @@ const placeOrder = async () => {
         tempLink.href = fileUrl;
         tempLink.setAttribute("download", "invoice.csv");
         tempLink.click();
+        tempLink.remove();
+        // TODO: Delete templink after download
+        // TODO: Store selectors in variables
+        // Clear cart after order
+        clearCartForCurrentUser();
     }
 };
 
 function init() {
     displayCartItems();
     displayBillDetails();
+    $("#clear_cart_confirmation_btn").click(async () => {
+        await clearCartForCurrentUser();
+        location.reload();
+    });
     $("#place_order_button").click(placeOrder);
 }
 

@@ -1,0 +1,62 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.logo {
+  filter: brightness(0) invert(1);
+}
+
+.container-fluid {
+  max-width: 1800px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background-color: #f5f5f5;
+}
+
+.item_card:hover {
+  background-color: #f5f5f5;
+  transition: 0.3s ease-in-out all;
+}
+
+.notifyjs-corner {
+  top: 50px !important;
+}
+.ribbon {
+  right: 10px;
+}
+
+.order-details-table-responsive {
+  height: 500px;
+  overflow: scroll;
+  /* Use overflow  auto */
+  /* Curse2: Never use overflow scroll  */
+}
+.order-details-table-responsive::-webkit-scrollbar {
+  display: none;
+}
+thead tr:nth-child(1) th {
+  /* Don't use nth ch */
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.card_image {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
+  /* Read alternative for objective-fit contain */
+}
